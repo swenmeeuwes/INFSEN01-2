@@ -12,11 +12,18 @@ namespace GUILibrary.Util.Observable
         public object Target { get; set; }
         public bool Cancelable { get; set; }
 
+        public bool prevented = false;
+
         public Event(string type, object target = null, bool cancelable = false)
         {
             this.Type = type;
             this.Target = target;
             this.Cancelable = cancelable;
+        }
+
+        public void PreventDefault()
+        {
+            prevented = true;
         }
     }
 }
