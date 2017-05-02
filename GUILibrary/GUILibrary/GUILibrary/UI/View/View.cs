@@ -22,7 +22,7 @@ namespace GUILibrary.UI.View
         protected List<IObserver> observers = new List<IObserver>();
         protected ViewState state = ViewState.IDLE;
 
-        public abstract void Draw();
+        public abstract void Draw(SpriteBatch spriteBatch);
 
         public virtual void Update()
         {
