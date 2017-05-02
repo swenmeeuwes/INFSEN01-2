@@ -8,6 +8,6 @@ namespace GUILibrary.Util.Observable
 {
     interface IObserver
     {
-        void onNotify(Event eventObject);
+        void OnNotify(Event eventObject);
     }
 }

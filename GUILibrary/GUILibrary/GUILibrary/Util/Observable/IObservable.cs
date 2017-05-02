@@ -8,8 +8,8 @@ namespace GUILibrary.Util.Observable
 {
     interface IObservable
     {
-        void registerObserver(IObserver observer);
-        void deregisterObserver(IObserver observer);
-        void notify(Event eventObject);
+        void RegisterObserver(IObserver observer);
+        void DeregisterObserver(IObserver observer);
+        void Notify(Event eventObject);
     }
 }
