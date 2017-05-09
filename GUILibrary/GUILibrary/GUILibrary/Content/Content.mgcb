@@ -56,3 +56,10 @@
 /processorParam:TextureFormat=Compressed
 /build:Assets/Fonts/Pixeled.spritefont
 
+#begin Assets/Fonts/Arial.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Assets/Fonts/Arial.spritefont
+

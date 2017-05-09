@@ -81,11 +81,10 @@
     <None Include="Content\Assets\asset-manifest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Content\Assets\Fonts\Pixeled.spritefont" />
-    <None Include="Content\Assets\Fonts\Pixeled.ttf" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\Assets\Fonts\" />
     <Folder Include="Content\Assets\Images\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

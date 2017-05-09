@@ -84,10 +84,6 @@ namespace GUILibrary
             // Add your update logic here
             button.Update(updateVisitor, (float)gameTime.ElapsedGameTime.TotalMilliseconds);
 
-            // START OF DEBUG
-            //System.Console.WriteLine("FRAMERATE {0}", 1.0f / gameTime.ElapsedGameTime.TotalSeconds);
-            // END OF DEBUG
-
             base.Update(gameTime);
         }
 

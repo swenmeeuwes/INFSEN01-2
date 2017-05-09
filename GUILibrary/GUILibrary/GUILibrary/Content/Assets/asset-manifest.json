@@ -1,8 +1,12 @@
 ﻿{
   "fonts": [
     {
+      "id": "Arial",
+      "src": "Assets/Fonts/Arial"
+    },
+    {
       "id": "Pixeled",
-      "src": "Assets/Fonts/Pixeled.spritefont"
+      "src": "Assets/Fonts/Pixeled"
     }
   ],
   "images": [
