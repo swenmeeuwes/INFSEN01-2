@@ -17,11 +17,13 @@ namespace GUILibrary.UI.Button
     {
         public string Text { get; set; }
         public Texture2D CurrentTexture { get; private set; }
+
         private ButtonTextureWrapper textures;
         public Button(string text, Rectangle area)
         {
             this.Text = text;
-            this.Area = area;
+            this.Position = new Vector2(area.X, area.Y);
+            this.Size = new Vector2(area.Width, area.Height);
 
             // Temp
             this.Color = Color.White;
@@ -52,7 +54,7 @@ namespace GUILibrary.UI.Button
         protected override void OnMouseRelease(MouseState mouseState)
         {
             // Quick hack to see if the mouse is still in the area
-            var mouseIsInArea = Area.Contains(mouseState.Position);
+            var mouseIsInArea = Bounds.Contains(mouseState.Position);
             if (mouseIsInArea)
                 this.CurrentTexture = textures.ButtonOver;
             else

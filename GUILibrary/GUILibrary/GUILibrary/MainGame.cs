@@ -1,9 +1,11 @@
 ﻿using GUILibrary.AssetLoading;
 using GUILibrary.UI.Button;
+using GUILibrary.UI.Label;
 using GUILibrary.Util.Visitor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace GUILibrary
 {
@@ -18,6 +20,7 @@ namespace GUILibrary
         IUpdateVisitor updateVisitor;
         IDrawVisitor drawVisitor;
 
+        Label fpsLabel;
         Button button;
 
         public MainGame()
@@ -58,7 +61,8 @@ namespace GUILibrary
 
             // Find a better place for these lines, window class maybe?
             button = new Button("This be a button", new Rectangle(100, 100, 200, 100));
-            
+            fpsLabel = new Label("0", new Vector2(GraphicsDevice.Viewport.Bounds.Width - 50, 0));
+
             drawVisitor = new DefaultDrawVisitor(spriteBatch);
         }
 
@@ -82,7 +86,12 @@ namespace GUILibrary
                 Exit();
 
             // Add your update logic here
-            button.Update(updateVisitor, (float)gameTime.ElapsedGameTime.TotalMilliseconds);
+            var deltaTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            fpsLabel.Text = (Math.Round(1 / gameTime.ElapsedGameTime.TotalSeconds)).ToString();
+
+            button.Update(updateVisitor, deltaTime);
+            fpsLabel.Update(updateVisitor, deltaTime);
 
             base.Update(gameTime);
         }
@@ -98,6 +107,7 @@ namespace GUILibrary
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp); // SamplerState.PointClamp disables smooth/ blurry stretching of textures
 
             button.Draw(drawVisitor);
+            fpsLabel.Draw(drawVisitor);
 
             spriteBatch.End();
 

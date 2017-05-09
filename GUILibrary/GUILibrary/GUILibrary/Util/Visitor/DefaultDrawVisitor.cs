@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using GUILibrary.UI.Button;
 using Microsoft.Xna.Framework.Graphics;
+using GUILibrary.UI.Label;
+using Microsoft.Xna.Framework;
 
 namespace GUILibrary.Util.Visitor
 {
@@ -17,7 +19,12 @@ namespace GUILibrary.Util.Visitor
         }      
         public void Draw(Button element)
         {
-            spriteBatch.Draw(element.CurrentTexture, element.Area, element.Color);
+            spriteBatch.Draw(element.CurrentTexture, element.Bounds, element.Color);
+        }
+
+        public void Draw(Label element)
+        {
+            spriteBatch.DrawString(element.Font, element.Text, new Vector2(element.Bounds.X, element.Bounds.Y), element.Color);
         }
     }
 }

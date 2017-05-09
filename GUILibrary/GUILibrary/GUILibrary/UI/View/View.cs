@@ -18,9 +18,16 @@ namespace GUILibrary.UI.View
         public bool Visible { get; set; }
         public float Opacity { get; set; }
         public Color Color { get; set; }
-        public Rectangle Area { get; set; }
-        //public Vector2 Position { get; set; } // Vector 2 instead of a point since XNA draw calls only take Vector2 types
-        //public Vector2 Origin { get; set; } // Vector 2 instead of a point since XNA draw calls only take Vector2 types
+        public Vector2 Position { get; set; }
+        public Vector2 Size { get; set; }
+        //public Vector2 Origin { get; set; }
+        public Rectangle Bounds
+        {
+            get
+            {
+                return new Rectangle(Position.ToPoint(), Size.ToPoint());
+            }
+        }
 
         protected List<IObserver> observers = new List<IObserver>();
         protected ViewState state = ViewState.IDLE;
@@ -35,7 +42,7 @@ namespace GUILibrary.UI.View
 
         private void HandleState(MouseState mouseState)
         {
-            var mouseIsInArea = Area.Contains(mouseState.Position);
+            var mouseIsInArea = Bounds.Contains(mouseState.Position);
             var mouseIsPressed = mouseState.LeftButton == ButtonState.Pressed || mouseState.MiddleButton == ButtonState.Pressed || mouseState.RightButton == ButtonState.Pressed;
 
             switch (state)

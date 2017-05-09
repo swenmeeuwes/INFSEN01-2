@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GUILibrary.UI.Button;
+using GUILibrary.UI.Label;
 
 namespace GUILibrary.Util.Visitor
 {
@@ -12,6 +13,11 @@ namespace GUILibrary.Util.Visitor
         public void Update(Button element, float deltaTime)
         {
             
+        }
+
+        public void Update(Label element, float deltaTime)
+        {
+
         }
     }
 }
