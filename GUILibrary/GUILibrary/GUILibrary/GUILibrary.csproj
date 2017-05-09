@@ -43,7 +43,8 @@
   <ItemGroup>
     <Compile Include="AssetLoading\AssetLibrary.cs" />
     <Compile Include="AssetLoading\AssetLoadService.cs" />
-    <Compile Include="AssetLoading\ManifestModel.cs" />
+    <Compile Include="AssetLoading\Model\AssetModel.cs" />
+    <Compile Include="AssetLoading\Model\ManifestModel.cs" />
     <Compile Include="MainGame.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -80,6 +81,8 @@
     <None Include="Content\Assets\asset-manifest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Content\Assets\Fonts\Pixeled.spritefont" />
+    <None Include="Content\Assets\Fonts\Pixeled.ttf" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
