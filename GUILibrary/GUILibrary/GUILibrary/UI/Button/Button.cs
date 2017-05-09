@@ -1,4 +1,5 @@
 ﻿using GUILibrary.AssetLoading;
+using GUILibrary.UI.View.State;
 using GUILibrary.Util.Observable;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,14 +13,20 @@ using System.Threading.Tasks;
 namespace GUILibrary.UI.Button
 {
     class Button : View.View
-    {
+    {       
         public Texture2D CurrentTexture { get; private set; }
+        private ButtonTextureWrapper textures;
         public Button(Rectangle area)
         {
             this.Area = area;
 
-            // TEST
-            this.CurrentTexture = AssetLibrary.Instance.RetrieveAsset<Texture2D>("DefaultButtonUp");
+            // Flyweight pattern could be useful here, we don't need multiple instances of the textures
+            this.textures = new ButtonTextureWrapper(
+                AssetLibrary.Instance.RetrieveAsset<Texture2D>("DefaultButtonUp"),
+                AssetLibrary.Instance.RetrieveAsset<Texture2D>("DefaultButtonOver"),
+                AssetLibrary.Instance.RetrieveAsset<Texture2D>("DefaultButtonDown")
+            );
+            this.CurrentTexture = textures.ButtonUp;
         }
         public override void Update()
         {
@@ -32,19 +39,27 @@ namespace GUILibrary.UI.Button
 
         protected override void OnMouseDown(MouseState mouseState)
         {
-            
+            this.CurrentTexture = textures.ButtonDown;
+        }
+
+        protected override void OnMouseRelease(MouseState mouseState)
+        {
+            // Quick hack to see if the mouse is still in the area
+            var mouseIsInArea = Area.Contains(mouseState.Position);
+            if (mouseIsInArea)
+                this.CurrentTexture = textures.ButtonOver;
+            else
+                this.CurrentTexture = textures.ButtonUp;
         }
 
         protected override void OnMouseEnter(MouseState mouseState)
         {
-            // TEST
-            this.CurrentTexture = AssetLibrary.Instance.RetrieveAsset<Texture2D>("DefaultButtonDown");
+            this.CurrentTexture = textures.ButtonOver;
         }
 
         protected override void OnMouseExit(MouseState mouseState)
         {
-            // TEXT
-            this.CurrentTexture = AssetLibrary.Instance.RetrieveAsset<Texture2D>("DefaultButtonUp");
+            this.CurrentTexture = textures.ButtonUp;
         }
     }
 }

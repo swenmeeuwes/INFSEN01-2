@@ -2,6 +2,7 @@
   "images": [
     {
       "DefaultButtonUp": "Assets/Images/DefaultButtonUp",
+      "DefaultButtonOver": "Assets/Images/DefaultButtonOver",
       "DefaultButtonDown": "Assets/Images/DefaultButtonDown"
     }
   ]
