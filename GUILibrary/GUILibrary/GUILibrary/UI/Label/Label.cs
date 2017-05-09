@@ -13,6 +13,7 @@ namespace GUILibrary.UI.Label
     class Label : View.View
     {
         public string Text { get; set; }
+        public TextAlign Align { get; set; } = TextAlign.LEFT;
         public SpriteFont Font { get; set; }
 
         public Label(string text, Vector2 position)
@@ -40,6 +41,6 @@ namespace GUILibrary.UI.Label
         public override void Draw(IDrawVisitor drawVisitor)
         {
             drawVisitor.Draw(this);
-        }
+        }        
     }
 }

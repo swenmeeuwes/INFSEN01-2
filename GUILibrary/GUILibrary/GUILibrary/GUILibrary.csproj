@@ -52,6 +52,7 @@
     <Compile Include="UI\Button\ButtonTextureWrapper.cs" />
     <Compile Include="UI\Drawing\IDrawable.cs" />
     <Compile Include="UI\Label\Label.cs" />
+    <Compile Include="UI\Label\TextAlign.cs" />
     <Compile Include="UI\View\IUpdatable.cs" />
     <Compile Include="UI\View\State\ViewState.cs" />
     <Compile Include="UI\View\View.cs" />

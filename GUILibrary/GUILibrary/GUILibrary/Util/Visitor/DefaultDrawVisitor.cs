@@ -20,12 +20,29 @@ namespace GUILibrary.Util.Visitor
         public void Draw(Button element)
         {            
             spriteBatch.Draw(element.CurrentTexture, element.Bounds, element.Color);
-            spriteBatch.DrawString(element.Label.Font, element.Label.Text, new Vector2(element.Label.Bounds.X, element.Label.Bounds.Y), element.Label.Color);
+            Draw(element.Label);            
         }
 
         public void Draw(Label element)
         {
-            spriteBatch.DrawString(element.Font, element.Text, new Vector2(element.Bounds.X, element.Bounds.Y), element.Color);
+            var measuredStringSize = element.Font.MeasureString(element.Text);
+
+            Vector2 calculatedPosition;            
+            switch(element.Align)
+            {
+                case TextAlign.CENTER:
+                    calculatedPosition = new Vector2(element.Bounds.X - measuredStringSize.X / 2, element.Bounds.Y);
+                    break;
+                case TextAlign.RIGHT:
+                    calculatedPosition = new Vector2(element.Bounds.X - measuredStringSize.X, element.Bounds.Y);
+                    break;
+                case TextAlign.LEFT:
+                default:
+                    calculatedPosition = new Vector2(element.Bounds.X, element.Bounds.Y);
+                    break;
+            }
+
+            spriteBatch.DrawString(element.Font, element.Text, calculatedPosition, element.Color);
         }
     }
 }

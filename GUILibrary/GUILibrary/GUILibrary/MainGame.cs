@@ -61,7 +61,8 @@ namespace GUILibrary
 
             // Find a better place for these lines, window class maybe?
             button = new Button("This be a button", new Vector2(100, 100));
-            fpsLabel = new Label("0", new Vector2(GraphicsDevice.Viewport.Bounds.Width - 50, 0));
+            fpsLabel = new Label("0", new Vector2(GraphicsDevice.Viewport.Bounds.Width - 5, 5));
+            fpsLabel.Align = TextAlign.RIGHT;
 
             drawVisitor = new DefaultDrawVisitor(spriteBatch);
         }
