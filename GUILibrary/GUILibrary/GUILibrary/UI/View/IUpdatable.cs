@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GUILibrary.Util.Visitor;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace GUILibrary.UI.View
 {
     interface IUpdatable
     {
+        void Update(IUpdateVisitor updateVisitor, float deltaTime);
     }
 }

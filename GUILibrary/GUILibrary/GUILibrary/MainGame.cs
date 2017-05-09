@@ -15,6 +15,7 @@ namespace GUILibrary
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        IUpdateVisitor updateVisitor;
         IDrawVisitor drawVisitor;
 
         Button button;
@@ -33,7 +34,8 @@ namespace GUILibrary
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            // Add your initialization logic here
+            updateVisitor = new DefaultUpdateVisitor();
 
             // Configuration
             this.IsMouseVisible = true;
@@ -79,8 +81,8 @@ namespace GUILibrary
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-            button.Update();
+            // Add your update logic here
+            button.Update(updateVisitor, (float)gameTime.ElapsedGameTime.TotalMilliseconds);
 
             // START OF DEBUG
             //System.Console.WriteLine("FRAMERATE {0}", 1.0f / gameTime.ElapsedGameTime.TotalSeconds);

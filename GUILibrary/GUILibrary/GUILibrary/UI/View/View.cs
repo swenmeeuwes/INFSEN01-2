@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace GUILibrary.UI.View
 {
-    abstract class View : Drawing.IDrawable, IObservable
+    abstract class View : Drawing.IDrawable, IObservable, IUpdatable
     {
         public bool Visible { get; set; }
         public float Opacity { get; set; }
@@ -27,10 +27,10 @@ namespace GUILibrary.UI.View
 
         public abstract void Draw(IDrawVisitor drawVisitor);
 
-        public virtual void Update()
+        public virtual void Update(IUpdateVisitor updateVisitor, float deltaTime)
         {
             var mouseState = Mouse.GetState();
-            HandleState(mouseState);
+            HandleState(mouseState); // Don't like exposing this method.. just for the visitor
         }
 
         private void HandleState(MouseState mouseState)

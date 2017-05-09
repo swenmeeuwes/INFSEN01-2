@@ -57,7 +57,9 @@
     <Compile Include="Util\Observable\IObservable.cs" />
     <Compile Include="Util\Observable\IObserver.cs" />
     <Compile Include="Util\Visitor\DefaultDrawVisitor.cs" />
+    <Compile Include="Util\Visitor\DefaultUpdateVisitor.cs" />
     <Compile Include="Util\Visitor\IDrawVisitor.cs" />
+    <Compile Include="Util\Visitor\IUpdateVisitor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

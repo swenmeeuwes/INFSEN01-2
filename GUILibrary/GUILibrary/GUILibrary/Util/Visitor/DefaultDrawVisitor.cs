@@ -17,7 +17,6 @@ namespace GUILibrary.Util.Visitor
         }      
         public void Draw(Button element)
         {
-            Console.WriteLine(element.Area);
             spriteBatch.Draw(element.CurrentTexture, element.Area, element.Color);
         }
     }

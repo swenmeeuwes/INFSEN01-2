@@ -34,9 +34,10 @@ namespace GUILibrary.UI.Button
             );
             this.CurrentTexture = textures.ButtonUp;
         }
-        public override void Update()
+        public override void Update(IUpdateVisitor updateVisitor, float deltaTime)
         {
-            base.Update();
+            updateVisitor.Update(this, deltaTime);
+            base.Update(updateVisitor, deltaTime);
         }
         public override void Draw(IDrawVisitor drawVisitor)
         {
