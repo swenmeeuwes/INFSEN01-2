@@ -10,11 +10,13 @@ namespace GUILibrary.UI.Button
     class ButtonTextureWrapper
     {
         public Texture2D ButtonUp { get; private set; }
+        public Texture2D ButtonOver { get; private set; }
         public Texture2D ButtonDown { get; private set; }
 
-        public ButtonTextureWrapper(Texture2D buttonUp, Texture2D buttonDown)
+        public ButtonTextureWrapper(Texture2D buttonUp, Texture2D buttonOver, Texture2D buttonDown)
         {
             ButtonUp = buttonUp;
+            ButtonOver = buttonOver;
             ButtonDown = buttonDown;
         }
     }
