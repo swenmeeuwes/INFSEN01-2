@@ -1,9 +1,16 @@
 ﻿{
   "images": [
     {
-      "DefaultButtonUp": "Assets/Images/DefaultButtonUp",
-      "DefaultButtonOver": "Assets/Images/DefaultButtonOver",
-      "DefaultButtonDown": "Assets/Images/DefaultButtonDown"
+      "id": "DefaultButtonUp",
+      "src": "Assets/Images/DefaultButtonUp"
+    },
+    {
+      "id": "DefaultButtonOver",
+      "src": "Assets/Images/DefaultButtonOver"
+    },
+    {
+      "id": "DefaultButtonDown",
+      "src": "Assets/Images/DefaultButtonDown"
     }
   ]
 }

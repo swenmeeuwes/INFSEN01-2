@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GUILibrary.AssetLoading
+namespace GUILibrary.AssetLoading.Model
 {
     class ManifestModel
-    {
-        public JArray Images { get; set; }
+    {        
+        public AssetModel[] Images { get; set; }
     }
 }
