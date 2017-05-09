@@ -136,7 +136,7 @@ namespace GUILibrary.UI.View
 
         protected virtual void OnMouseRelease(MouseState mouseState)
         {
-
+            
         }
 
         protected virtual void OnMouseEnter(MouseState mouseState)

@@ -13,5 +13,10 @@ namespace GUILibrary.UI.Label
         RIGHT = 2
         //TOP = 4,
         //BOTTOM = 8
+
+        // Maybe go for:
+        // TOPLEFT
+        // TOPRIGHT
+        // + strategy
     }
 }

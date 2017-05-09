@@ -1,6 +1,7 @@
 ﻿using GUILibrary.AssetLoading;
 using GUILibrary.UI.Button;
 using GUILibrary.UI.Label;
+using GUILibrary.Util.Observable;
 using GUILibrary.Util.Visitor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -61,8 +62,10 @@ namespace GUILibrary
 
             // Find a better place for these lines, window class maybe?
             button = new Button("This be a button", new Vector2(100, 100));
-            fpsLabel = new Label("0", new Vector2(GraphicsDevice.Viewport.Bounds.Width - 5, 5));
-            fpsLabel.Align = TextAlign.RIGHT;
+            fpsLabel = new Label("0", new Vector2(GraphicsDevice.Viewport.Bounds.Width - 5, 5)) { Align = TextAlign.RIGHT };
+
+            var printObserver = new ActionObserver(e => { Console.WriteLine(((Button)e.Target).Label.Text + " " + e.Type); });
+            button.RegisterObserver(printObserver);
 
             drawVisitor = new DefaultDrawVisitor(spriteBatch);
         }
@@ -74,6 +77,7 @@ namespace GUILibrary
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+            
         }
 
         /// <summary>

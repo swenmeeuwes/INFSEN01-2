@@ -1,4 +1,5 @@
 ﻿using GUILibrary.AssetLoading;
+using GUILibrary.UI.Label;
 using GUILibrary.UI.View.State;
 using GUILibrary.Util.Observable;
 using GUILibrary.Util.Visitor;
@@ -56,7 +57,12 @@ namespace GUILibrary.UI.Button
             // Quick hack to see if the mouse is still in the area
             var mouseIsInArea = Bounds.Contains(mouseState.Position);
             if (mouseIsInArea)
+            {
+                var eventObject = new Event("Click", this);
+                Notify(eventObject);
+
                 this.CurrentTexture = textures.ButtonOver;
+            }
             else
                 this.CurrentTexture = textures.ButtonUp;
         }
