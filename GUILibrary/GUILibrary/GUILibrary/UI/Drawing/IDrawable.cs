@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using GUILibrary.Util.Visitor;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace GUILibrary.UI.Drawing
 {
     interface IDrawable
     {
-        void Draw(SpriteBatch spriteBatch);
+        void Draw(IDrawVisitor drawVisitor);
     }
 }

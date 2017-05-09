@@ -1,6 +1,7 @@
 ﻿using GUILibrary.UI.Drawing;
 using GUILibrary.UI.View.State;
 using GUILibrary.Util.Observable;
+using GUILibrary.Util.Visitor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -16,6 +17,7 @@ namespace GUILibrary.UI.View
     {
         public bool Visible { get; set; }
         public float Opacity { get; set; }
+        public Color Color { get; set; }
         public Rectangle Area { get; set; }
         //public Vector2 Position { get; set; } // Vector 2 instead of a point since XNA draw calls only take Vector2 types
         //public Vector2 Origin { get; set; } // Vector 2 instead of a point since XNA draw calls only take Vector2 types
@@ -23,7 +25,7 @@ namespace GUILibrary.UI.View
         protected List<IObserver> observers = new List<IObserver>();
         protected ViewState state = ViewState.IDLE;
 
-        public abstract void Draw(SpriteBatch spriteBatch);
+        public abstract void Draw(IDrawVisitor drawVisitor);
 
         public virtual void Update()
         {

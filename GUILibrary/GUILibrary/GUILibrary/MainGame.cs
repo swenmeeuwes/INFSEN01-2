@@ -1,5 +1,6 @@
 ﻿using GUILibrary.AssetLoading;
 using GUILibrary.UI.Button;
+using GUILibrary.Util.Visitor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -14,8 +15,9 @@ namespace GUILibrary
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        IDrawVisitor drawVisitor;
+
         Button button;
-        Texture2D buttonTexture;
 
         public MainGame()
         {
@@ -49,10 +51,13 @@ namespace GUILibrary
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here  
-            AssetLoadService.Instance.LoadAssets(Content);          
+            // Load your game content here  
+            AssetLoadService.Instance.LoadAssets(Content);
 
-            button = new Button(new Rectangle(100, 100, 200, 100));
+            // Find a better place for these lines, window class maybe?
+            button = new Button("This be a button", new Rectangle(100, 100, 200, 100));
+            
+            drawVisitor = new DefaultDrawVisitor(spriteBatch);
         }
 
         /// <summary>
@@ -94,7 +99,7 @@ namespace GUILibrary
 
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp); // SamplerState.PointClamp disables smooth/ blurry stretching of textures
 
-            button.Draw(spriteBatch);
+            button.Draw(drawVisitor);
 
             spriteBatch.End();
 

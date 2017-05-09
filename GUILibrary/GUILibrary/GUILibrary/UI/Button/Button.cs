@@ -1,6 +1,7 @@
 ﻿using GUILibrary.AssetLoading;
 using GUILibrary.UI.View.State;
 using GUILibrary.Util.Observable;
+using GUILibrary.Util.Visitor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -13,12 +14,17 @@ using System.Threading.Tasks;
 namespace GUILibrary.UI.Button
 {
     class Button : View.View
-    {       
+    {
+        public string Text { get; set; }
         public Texture2D CurrentTexture { get; private set; }
         private ButtonTextureWrapper textures;
-        public Button(Rectangle area)
+        public Button(string text, Rectangle area)
         {
+            this.Text = text;
             this.Area = area;
+
+            // Temp
+            this.Color = Color.White;
 
             // Flyweight pattern could be useful here, we don't need multiple instances of the textures
             this.textures = new ButtonTextureWrapper(
@@ -32,9 +38,9 @@ namespace GUILibrary.UI.Button
         {
             base.Update();
         }
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(IDrawVisitor drawVisitor)
         {
-            spriteBatch.Draw(CurrentTexture, Area, Color.White);
+            drawVisitor.Draw(this);
         }
 
         protected override void OnMouseDown(MouseState mouseState)
