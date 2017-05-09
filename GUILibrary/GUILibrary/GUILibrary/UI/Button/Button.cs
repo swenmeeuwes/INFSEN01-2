@@ -15,15 +15,15 @@ namespace GUILibrary.UI.Button
 {
     class Button : View.View
     {
-        public string Text { get; set; }
+        public Label.Label Label { get; set; }
         public Texture2D CurrentTexture { get; private set; }
 
         private ButtonTextureWrapper textures;
         public Button(string text, Rectangle area)
         {
-            this.Text = text;
             this.Position = new Vector2(area.X, area.Y);
             this.Size = new Vector2(area.Width, area.Height);
+            this.Label = new Label.Label(text, Position);
 
             // Temp
             this.Color = Color.White;
@@ -43,7 +43,7 @@ namespace GUILibrary.UI.Button
         }
         public override void Draw(IDrawVisitor drawVisitor)
         {
-            drawVisitor.Draw(this);
+            drawVisitor.Draw(this);            
         }
 
         protected override void OnMouseDown(MouseState mouseState)

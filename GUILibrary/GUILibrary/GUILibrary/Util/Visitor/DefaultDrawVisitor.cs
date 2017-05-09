@@ -18,8 +18,9 @@ namespace GUILibrary.Util.Visitor
             this.spriteBatch = spriteBatch;
         }      
         public void Draw(Button element)
-        {
+        {            
             spriteBatch.Draw(element.CurrentTexture, element.Bounds, element.Color);
+            spriteBatch.DrawString(element.Label.Font, element.Label.Text, new Vector2(element.Label.Bounds.X, element.Label.Bounds.Y), element.Label.Color);
         }
 
         public void Draw(Label element)
