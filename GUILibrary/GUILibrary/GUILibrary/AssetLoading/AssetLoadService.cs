@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Xna.Framework.Content;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -22,26 +23,23 @@ namespace GUILibrary.AssetLoading
             }
         }
 
-        public Dictionary<string, string> Images { get; set; }
-
         // Make the constructor private and thus uninstantiateable
         private AssetLoadService() { }
 
-        public void LoadAssets()
+        public void LoadAssets(ContentManager contentManager)
         {
             try
             {
                 var jsonString = File.ReadAllText(@"Content/Assets/asset-manifest.json");
                 var jsonObject = JsonConvert.DeserializeObject<ManifestModel>(jsonString);
 
-                Images = new Dictionary<string, string>();
-
                 var imageGroup = jsonObject.Images;
                 foreach (JObject jObject in imageGroup.Children<JObject>())
                 {
                     foreach (JProperty jProperty in jObject.Properties())
                     {
-                        Images.Add(jProperty.Name, (string)jProperty.Value);
+                        var asset = contentManager.Load<object>((string)jProperty.Value);
+                        AssetLibrary.Instance.StoreAsset(jProperty.Name, asset);
                     }
                 }
 

@@ -17,8 +17,8 @@ namespace GUILibrary.UI.View
         public bool Visible { get; set; }
         public float Opacity { get; set; }
         public Rectangle Area { get; set; }
-        public Point Position { get; set; }
-        public Point Origin { get; set; }
+        //public Vector2 Position { get; set; } // Vector 2 instead of a point since XNA draw calls only take Vector2 types
+        //public Vector2 Origin { get; set; } // Vector 2 instead of a point since XNA draw calls only take Vector2 types
 
         protected List<IObserver> observers = new List<IObserver>();
         protected ViewState state = ViewState.IDLE;

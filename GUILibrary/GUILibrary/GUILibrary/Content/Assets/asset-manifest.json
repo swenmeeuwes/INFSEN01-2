@@ -1,7 +1,8 @@
 ﻿{
   "images": [
     {
-      "Square": "assets/Square"
+      "DefaultButtonUp": "Assets/Images/DefaultButtonUp",
+      "DefaultButtonDown": "Assets/Images/DefaultButtonDown"
     }
   ]
 }

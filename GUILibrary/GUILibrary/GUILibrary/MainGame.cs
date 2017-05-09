@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GUILibrary.AssetLoading;
+using GUILibrary.UI.Button;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -11,6 +13,9 @@ namespace GUILibrary
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        Button button;
+        Texture2D buttonTexture;
 
         public MainGame()
         {
@@ -28,6 +33,10 @@ namespace GUILibrary
         {
             // TODO: Add your initialization logic here
 
+            // Configuration
+            this.IsMouseVisible = true;
+
+            //
             base.Initialize();
         }
 
@@ -40,7 +49,10 @@ namespace GUILibrary
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
+            // TODO: use this.Content to load your game content here  
+            AssetLoadService.Instance.LoadAssets(Content);          
+
+            button = new Button(new Rectangle(100, 100, 200, 100));
         }
 
         /// <summary>
@@ -63,6 +75,11 @@ namespace GUILibrary
                 Exit();
 
             // TODO: Add your update logic here
+            button.Update();
+
+            // START OF DEBUG
+            //System.Console.WriteLine("FRAMERATE {0}", 1.0f / gameTime.ElapsedGameTime.TotalSeconds);
+            // END OF DEBUG
 
             base.Update(gameTime);
         }
@@ -75,7 +92,11 @@ namespace GUILibrary
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp); // SamplerState.PointClamp disables smooth/ blurry stretching of textures
+
+            button.Draw(spriteBatch);
+
+            spriteBatch.End();
 
             base.Draw(gameTime);
         }
