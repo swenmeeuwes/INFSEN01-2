@@ -56,6 +56,7 @@
     <Compile Include="UI\View\IUpdatable.cs" />
     <Compile Include="UI\View\State\ViewState.cs" />
     <Compile Include="UI\View\View.cs" />
+    <Compile Include="UI\Window\GUIWindow.cs" />
     <Compile Include="Util\Observable\Event.cs" />
     <Compile Include="Util\Observable\IObservable.cs" />
     <Compile Include="Util\Observable\IObserver.cs" />

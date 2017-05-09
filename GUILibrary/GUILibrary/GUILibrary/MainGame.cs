@@ -1,6 +1,7 @@
 ﻿using GUILibrary.AssetLoading;
 using GUILibrary.UI.Button;
 using GUILibrary.UI.Label;
+using GUILibrary.UI.Window;
 using GUILibrary.Util.Observable;
 using GUILibrary.Util.Visitor;
 using Microsoft.Xna.Framework;
@@ -21,8 +22,7 @@ namespace GUILibrary
         IUpdateVisitor updateVisitor;
         IDrawVisitor drawVisitor;
 
-        Label fpsLabel;
-        Button button;
+        GUIWindow mainWindow;
 
         public MainGame()
         {
@@ -60,12 +60,15 @@ namespace GUILibrary
             // Load your game content here  
             AssetLoadService.Instance.LoadAssets(Content);
 
-            // Find a better place for these lines, window class maybe?
-            button = new Button("This be a button", new Vector2(100, 100));
-            fpsLabel = new Label("0", new Vector2(GraphicsDevice.Viewport.Bounds.Width - 5, 5)) { Align = TextAlign.RIGHT };
-
+            var aButton = new Button("This be a button", new Vector2(100, 100));
             var printObserver = new ActionObserver(e => { Console.WriteLine(((Button)e.Target).Label.Text + " " + e.Type); });
-            button.RegisterObserver(printObserver);
+            aButton.RegisterObserver(printObserver);
+
+            // Todo: Implement mediators ... 
+            mainWindow = new GUIWindow("main",
+                aButton,
+                new Label("0", new Vector2(GraphicsDevice.Viewport.Bounds.Width - 5, 5)) { Align = TextAlign.RIGHT }
+            );
 
             drawVisitor = new DefaultDrawVisitor(spriteBatch);
         }
@@ -92,11 +95,7 @@ namespace GUILibrary
 
             // Add your update logic here
             var deltaTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
-
-            fpsLabel.Text = (Math.Round(1 / gameTime.ElapsedGameTime.TotalSeconds)).ToString();
-
-            button.Update(updateVisitor, deltaTime);
-            fpsLabel.Update(updateVisitor, deltaTime);
+            mainWindow.Update(updateVisitor, deltaTime);
 
             base.Update(gameTime);
         }
@@ -111,8 +110,7 @@ namespace GUILibrary
 
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp); // SamplerState.PointClamp disables smooth/ blurry stretching of textures
 
-            button.Draw(drawVisitor);
-            fpsLabel.Draw(drawVisitor);
+            mainWindow.Draw(drawVisitor);
 
             spriteBatch.End();
 
