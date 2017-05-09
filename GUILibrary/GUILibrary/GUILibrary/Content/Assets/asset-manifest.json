@@ -1,4 +1,10 @@
 ﻿{
+  "fonts": [
+    {
+      "id": "Pixeled",
+      "src": "Assets/Fonts/Pixeled.spritefont"
+    }
+  ],
   "images": [
     {
       "id": "DefaultButtonUp",

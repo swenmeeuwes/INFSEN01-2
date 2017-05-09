@@ -34,7 +34,7 @@ namespace GUILibrary.AssetLoading
                 var jsonString = File.ReadAllText(@"Content/Assets/asset-manifest.json");
                 var manifest = JsonConvert.DeserializeObject<ManifestModel>(jsonString);
 
-                LoadAssetGroups(contentManager, manifest.Images);
+                LoadAssetGroups(contentManager, manifest.Images, manifest.Fonts);
             }
             catch (Exception e)
             {

@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace GUILibrary.AssetLoading.Model
 {
     class ManifestModel
-    {        
+    {
+        public AssetModel[] Fonts { get; set; }
         public AssetModel[] Images { get; set; }
     }
 }
