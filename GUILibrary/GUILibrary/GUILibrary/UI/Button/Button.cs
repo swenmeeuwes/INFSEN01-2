@@ -19,11 +19,11 @@ namespace GUILibrary.UI.Button
         public Texture2D CurrentTexture { get; private set; }
 
         private ButtonTextureWrapper textures;
-        public Button(string text, Rectangle area)
+        public Button(string text, Vector2 position)
         {
-            this.Position = new Vector2(area.X, area.Y);
-            this.Size = new Vector2(area.Width, area.Height);
+            this.Position = position;            
             this.Label = new Label.Label(text, Position);
+            this.Size = Label.Font.MeasureString(text);
 
             // Temp
             this.Color = Color.White;

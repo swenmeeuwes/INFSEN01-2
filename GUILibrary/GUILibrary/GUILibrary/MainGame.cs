@@ -60,7 +60,7 @@ namespace GUILibrary
             AssetLoadService.Instance.LoadAssets(Content);
 
             // Find a better place for these lines, window class maybe?
-            button = new Button("This be a button", new Rectangle(100, 100, 200, 100));
+            button = new Button("This be a button", new Vector2(100, 100));
             fpsLabel = new Label("0", new Vector2(GraphicsDevice.Viewport.Bounds.Width - 50, 0));
 
             drawVisitor = new DefaultDrawVisitor(spriteBatch);

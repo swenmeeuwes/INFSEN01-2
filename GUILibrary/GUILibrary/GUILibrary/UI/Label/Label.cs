@@ -21,7 +21,7 @@ namespace GUILibrary.UI.Label
             this.Position = position;
 
             // Use a font as "default" label font
-            this.Font = AssetLibrary.Instance.RetrieveAsset<SpriteFont>("Pixeled");
+            this.Font = AssetLibrary.Instance.RetrieveAsset<SpriteFont>("Arial");
             this.Color = Color.Black;
         }
         public Label(string text, SpriteFont font)
