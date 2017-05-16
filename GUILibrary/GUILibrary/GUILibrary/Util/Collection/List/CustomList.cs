@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GUILibrary.Util.Collection.List
 {
-    class CustomList<T> : IAggregate<T>
+    public class CustomList<T> : IAggregate<T>
     {
         private List<T> content;
         // Allow for index lookup, ex: customList[0]

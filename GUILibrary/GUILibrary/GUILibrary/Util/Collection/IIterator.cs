@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GUILibrary.Util.Collection
 {
-    interface IIterator<T>
+    public interface IIterator<T>
     {
         bool HasNext();
         T Next();

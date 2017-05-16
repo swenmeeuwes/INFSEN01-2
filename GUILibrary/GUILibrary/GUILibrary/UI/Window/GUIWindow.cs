@@ -6,33 +6,44 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GUILibrary.Util.Visitor;
+using GUILibrary.Util.Collection.List;
 
 namespace GUILibrary.UI.Window
 {
     class GUIWindow : IUpdatable, IDrawable
     {
         public string Id { get; set; }
-        List<View.View> views;
+        CustomList<View.View> views;
 
         public GUIWindow(string id)
         {
             Id = id;
-            views = new List<View.View>();
+            views = new CustomList<View.View>();
         }
         public GUIWindow(string id, params View.View[] viewElements)
         {
             Id = id;
-            views = viewElements.ToList();
+            views = viewElements.ToCustomList();
         }
 
         public void Update(IUpdateVisitor updateVisitor, float deltaTime)
         {
-            views.ForEach(v => v.Update(updateVisitor, deltaTime));
+            var viewIterator = views.GetIterator();
+            while (viewIterator.HasNext())
+            {
+                var view = viewIterator.Next();
+                view.Update(updateVisitor, deltaTime);
+            }
         }
 
         public void Draw(IDrawVisitor drawVisitor)
         {
-            views.ForEach(v => v.Draw(drawVisitor));
+            var viewIterator = views.GetIterator();
+            while (viewIterator.HasNext())
+            {
+                var view = viewIterator.Next();
+                view.Draw(drawVisitor);
+            }
         }
     }
 }
