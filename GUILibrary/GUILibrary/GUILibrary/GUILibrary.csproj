@@ -62,6 +62,8 @@
     <Compile Include="Util\Collection\Array\CustomArrayIterator.cs" />
     <Compile Include="Util\Collection\IAggregate.cs" />
     <Compile Include="Util\Collection\IIterator.cs" />
+    <Compile Include="Util\Collection\List\CustomList.cs" />
+    <Compile Include="Util\Collection\List\CustomListIterator.cs" />
     <Compile Include="Util\Observable\Event.cs" />
     <Compile Include="Util\Observable\IObservable.cs" />
     <Compile Include="Util\Observable\IObserver.cs" />
