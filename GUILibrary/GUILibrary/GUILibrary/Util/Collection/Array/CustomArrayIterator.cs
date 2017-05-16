@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GUILibrary.Util.Collection.Array
 {
-    class CustomArrayIterator<T> : IIterator<T>
+    public class CustomArrayIterator<T> : IIterator<T>
     {
         public T[] Content { get; private set; }
         private int indexCounter;
@@ -25,12 +25,12 @@ namespace GUILibrary.Util.Collection.Array
 
         public bool HasNext()
         {
-            return indexCounter < Content.Length;
+            return indexCounter < Content.Length - 1;
         }
 
         public T Next()
         {
-            return Content[indexCounter++];
+            return Content[++indexCounter];
         }
     }
 }

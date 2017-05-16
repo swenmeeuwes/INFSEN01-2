@@ -25,12 +25,12 @@ namespace GUILibrary.Util.Collection.List
 
         public bool HasNext()
         {
-            return indexCounter < Content.Count;
+            return indexCounter < Content.Count - 1;
         }
 
         public T Next()
         {
-            return Content[indexCounter++];
+            return Content[++indexCounter];
         }
     }
 }
