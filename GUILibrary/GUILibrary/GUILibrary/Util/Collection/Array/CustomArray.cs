@@ -28,7 +28,7 @@ namespace GUILibrary.Util.Collection.Array
         }
         public IIterator<T> GetIterator()
         {
-            return 
+            return new CustomArrayIterator<T>(content);
         }
     }
 }
