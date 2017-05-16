@@ -26,6 +26,12 @@ namespace GUILibrary.UI.Window
             views = viewElements.ToCustomList();
         }
 
+        public GUIWindow(string id, CustomList<View.View> viewElements)
+        {
+            Id = id;
+            views = viewElements;
+        }
+
         public void Update(IUpdateVisitor updateVisitor, float deltaTime)
         {
             var viewIterator = views.GetIterator();
