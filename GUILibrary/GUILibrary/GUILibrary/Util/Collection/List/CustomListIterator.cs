@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace GUILibrary.Util.Collection.List
 {
-    class CustomListIterator<T> : AbstractNumericIndexIterator<T>
+    class CustomListIterator<T> : IIterator<T>
     {
         public List<T> Content { get; private set; }
+        private int indexCounter;
         public CustomListIterator(List<T> content)
         {
             Content = content;
             indexCounter = -1;
         }
-        public override T Current()
+        public T Current()
         {
             if (indexCounter < 0)
                 throw new Exception("[CustomListIterator] Next() should be called before accessing the current value.");
@@ -22,12 +23,12 @@ namespace GUILibrary.Util.Collection.List
             return Content[indexCounter];
         }
 
-        public override bool HasNext()
+        public bool HasNext()
         {
             return indexCounter < Content.Count;
         }
 
-        public override T Next()
+        public T Next()
         {
             return Content[indexCounter++];
         }
