@@ -57,12 +57,12 @@
     <Compile Include="UI\View\State\ViewState.cs" />
     <Compile Include="UI\View\View.cs" />
     <Compile Include="UI\Window\GUIWindow.cs" />
-    <Compile Include="Util\Collection\AbstractNumericIndexIterator.cs" />
     <Compile Include="Util\Collection\Array\CustomArray.cs" />
     <Compile Include="Util\Collection\Array\CustomArrayIterator.cs" />
     <Compile Include="Util\Collection\IAggregate.cs" />
     <Compile Include="Util\Collection\IIterator.cs" />
     <Compile Include="Util\Collection\List\CustomList.cs" />
+    <Compile Include="Util\Collection\List\CustomListExtensions.cs" />
     <Compile Include="Util\Collection\List\CustomListIterator.cs" />
     <Compile Include="Util\Observable\Event.cs" />
     <Compile Include="Util\Observable\IObservable.cs" />
