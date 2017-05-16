@@ -36,5 +36,10 @@ namespace GUILibrary.Util.Collection.List
         {
             content.Add(item);
         }
+
+        public void Remove(T item)
+        {
+            content.Remove(item);
+        }
     }
 }
