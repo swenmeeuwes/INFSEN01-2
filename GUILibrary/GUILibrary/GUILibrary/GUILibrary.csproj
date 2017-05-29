@@ -45,6 +45,8 @@
     <Compile Include="AssetLoading\AssetLoadService.cs" />
     <Compile Include="AssetLoading\Model\AssetModel.cs" />
     <Compile Include="AssetLoading\Model\ManifestModel.cs" />
+    <Compile Include="Input\IInputManager.cs" />
+    <Compile Include="Input\InputManager.cs" />
     <Compile Include="MainGame.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
