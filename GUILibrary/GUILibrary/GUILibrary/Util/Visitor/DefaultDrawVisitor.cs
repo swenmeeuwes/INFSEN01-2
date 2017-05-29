@@ -7,42 +7,25 @@ using GUILibrary.UI.Button;
 using Microsoft.Xna.Framework.Graphics;
 using GUILibrary.UI.Label;
 using Microsoft.Xna.Framework;
+using GUILibrary.UI.Drawing;
 
 namespace GUILibrary.Util.Visitor
 {
     class DefaultDrawVisitor : IDrawVisitor
     {
-        private SpriteBatch spriteBatch;
-        public DefaultDrawVisitor(SpriteBatch spriteBatch)
+        private IDrawManager drawManager;
+        public DefaultDrawVisitor(IDrawManager drawManager)
         {
-            this.spriteBatch = spriteBatch;
+            this.drawManager = drawManager;
         }      
         public void Draw(Button element)
-        {            
-            spriteBatch.Draw(element.CurrentTexture, element.Bounds, element.Color);
-            Draw(element.Label);            
+        {
+            drawManager.Draw(element);        
         }
 
         public void Draw(Label element)
         {
-            var measuredStringSize = element.Font.MeasureString(element.Text);
-
-            Vector2 calculatedPosition;            
-            switch(element.Align)
-            {
-                case TextAlign.CENTER:
-                    calculatedPosition = new Vector2(element.Bounds.X - measuredStringSize.X / 2, element.Bounds.Y);
-                    break;
-                case TextAlign.RIGHT:
-                    calculatedPosition = new Vector2(element.Bounds.X - measuredStringSize.X, element.Bounds.Y);
-                    break;
-                case TextAlign.LEFT:
-                default:
-                    calculatedPosition = new Vector2(element.Bounds.X, element.Bounds.Y);
-                    break;
-            }
-
-            spriteBatch.DrawString(element.Font, element.Text, calculatedPosition, element.Color);
+            drawManager.Draw(element);
         }
     }
 }

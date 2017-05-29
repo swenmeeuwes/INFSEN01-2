@@ -50,7 +50,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\Button\Button.cs" />
     <Compile Include="UI\Button\ButtonTextureWrapper.cs" />
+    <Compile Include="UI\Drawing\DrawManager.cs" />
+    <Compile Include="UI\Drawing\IDrawManager.cs" />
     <Compile Include="UI\Drawing\IDrawable.cs" />
+    <Compile Include="UI\Drawing\IDrawStrategy.cs" />
+    <Compile Include="UI\Drawing\LibGDXDrawStrategy.cs" />
+    <Compile Include="UI\Drawing\MonoGameDrawStrategy.cs" />
     <Compile Include="UI\Label\Label.cs" />
     <Compile Include="UI\Label\TextAlign.cs" />
     <Compile Include="UI\View\IUpdatable.cs" />

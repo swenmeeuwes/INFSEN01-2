@@ -44,7 +44,8 @@ namespace GUILibrary.UI.Button
         }
         public override void Draw(IDrawVisitor drawVisitor)
         {
-            drawVisitor.Draw(this);            
+            drawVisitor.Draw(this);
+            drawVisitor.Draw(this.Label);
         }
 
         protected override void OnMouseDown(MouseState mouseState)

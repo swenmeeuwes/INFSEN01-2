@@ -1,5 +1,6 @@
 ﻿using GUILibrary.AssetLoading;
 using GUILibrary.UI.Button;
+using GUILibrary.UI.Drawing;
 using GUILibrary.UI.Label;
 using GUILibrary.UI.Window;
 using GUILibrary.Util.Observable;
@@ -18,6 +19,8 @@ namespace GUILibrary
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        DrawManager drawManager;
 
         IUpdateVisitor updateVisitor;
         IDrawVisitor drawVisitor;
@@ -38,7 +41,7 @@ namespace GUILibrary
         /// </summary>
         protected override void Initialize()
         {
-            // Add your initialization logic here
+            // Initialization logic here            
             updateVisitor = new DefaultUpdateVisitor();
 
             // Configuration
@@ -70,7 +73,8 @@ namespace GUILibrary
                 new Label("0", new Vector2(GraphicsDevice.Viewport.Bounds.Width - 5, 5)) { Align = TextAlign.RIGHT }
             );
 
-            drawVisitor = new DefaultDrawVisitor(spriteBatch);
+            drawManager = new DrawManager(new MonoGameDrawStrategy(spriteBatch));
+            drawVisitor = new DefaultDrawVisitor(drawManager);
         }
 
         /// <summary>
