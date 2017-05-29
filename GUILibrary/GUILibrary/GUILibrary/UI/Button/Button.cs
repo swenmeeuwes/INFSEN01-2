@@ -1,11 +1,11 @@
 ﻿using GUILibrary.AssetLoading;
+using GUILibrary.Input;
 using GUILibrary.UI.Label;
 using GUILibrary.UI.View.State;
 using GUILibrary.Util.Observable;
 using GUILibrary.Util.Visitor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,7 +56,7 @@ namespace GUILibrary.UI.Button
         protected override void OnMouseRelease(MouseState mouseState)
         {
             // Quick hack to see if the mouse is still in the area
-            var mouseIsInArea = Bounds.Contains(mouseState.Position);
+            var mouseIsInArea = Bounds.Contains(new Point(mouseState.Position.X, mouseState.Position.Y));
             if (mouseIsInArea)
             {
                 var eventObject = new Event("Click", this);

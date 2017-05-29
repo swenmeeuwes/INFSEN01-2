@@ -1,10 +1,9 @@
-﻿using GUILibrary.UI.Drawing;
+﻿using GUILibrary.Input;
+using GUILibrary.UI.Drawing;
 using GUILibrary.UI.View.State;
 using GUILibrary.Util.Observable;
 using GUILibrary.Util.Visitor;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +20,7 @@ namespace GUILibrary.UI.View
         public Vector2 Position { get; set; }
         public Vector2 Size { get; set; }
         //public Vector2 Origin { get; set; }
-        public Rectangle Bounds
+        public Rectangle Bounds // To-do: Make custom Rectangle class
         {
             get
             {
@@ -36,14 +35,14 @@ namespace GUILibrary.UI.View
 
         public virtual void Update(IUpdateVisitor updateVisitor, float deltaTime)
         {
-            var mouseState = Mouse.GetState();
+            var mouseState = InputManager.Instance.Mouse;
             HandleState(mouseState); // Don't like exposing this method.. just for the visitor
         }
 
         private void HandleState(MouseState mouseState)
         {
-            var mouseIsInArea = Bounds.Contains(mouseState.Position);
-            var mouseIsPressed = mouseState.LeftButton == ButtonState.Pressed || mouseState.MiddleButton == ButtonState.Pressed || mouseState.RightButton == ButtonState.Pressed;
+            var mouseIsInArea = Bounds.Contains(new Point(mouseState.Position.X, mouseState.Position.Y));
+            var mouseIsPressed = mouseState.LeftButton == ButtonState.PRESSED || mouseState.MiddleButton == ButtonState.PRESSED || mouseState.RightButton == ButtonState.PRESSED;
 
             switch (state)
             {
