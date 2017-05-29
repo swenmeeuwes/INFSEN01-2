@@ -10,7 +10,7 @@ namespace GUILibrary.UI.Drawing
 {
     /// <summary>
     /// This class is a stub
-    /// It shows how adapters for other drawing libraries should be implemented
+    /// It shows how the strategies for adapters in other drawing libraries should be implemented
     /// </summary>
     class LibGDXDrawStrategy : IDrawStrategy
     {
