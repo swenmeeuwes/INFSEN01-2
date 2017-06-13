@@ -80,6 +80,7 @@
     <Compile Include="Util\Observable\IObserver.cs" />
     <Compile Include="Util\Observable\ActionObserver.cs" />
     <Compile Include="Util\Structures\Point2D.cs" />
+    <Compile Include="Util\Structures\Rectangle.cs" />
     <Compile Include="Util\Visitor\DefaultDrawVisitor.cs" />
     <Compile Include="Util\Visitor\DefaultUpdateVisitor.cs" />
     <Compile Include="Util\Visitor\IDrawVisitor.cs" />
