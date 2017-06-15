@@ -33,13 +33,22 @@ namespace GUILibrary.UI.View
 
         public abstract void Draw(IDrawVisitor drawVisitor);
 
-        public virtual void Update(IUpdateVisitor updateVisitor, float deltaTime)
+        public virtual void HandleClick(IOnClickVisitor onClickVisitor)
         {
-            var mouseState = InputManager.Instance.Mouse;
-            HandleState(mouseState); // Don't like exposing this method.. just for the visitor
+            onClickVisitor.HandleClick(this);
         }
 
-        private void HandleState(MouseState mouseState)
+        public virtual void Update(IUpdateVisitor updateVisitor, float deltaTime)
+        {
+            updateVisitor.Update(this, deltaTime);
+        }
+
+        public ViewState GetState()
+        {
+            return state;
+        }
+
+        public void UpdateState(MouseState mouseState)
         {
             var mouseIsInArea = Bounds.Contains(new Point2D<int>(mouseState.Position.X, mouseState.Position.Y));
             var mouseIsPressed = mouseState.LeftButton == ButtonState.PRESSED || mouseState.MiddleButton == ButtonState.PRESSED || mouseState.RightButton == ButtonState.PRESSED;
@@ -50,7 +59,7 @@ namespace GUILibrary.UI.View
                     // Transitions
                     if (mouseIsInArea && mouseIsPressed)
                         state = ViewState.PRESSED;
-                    else if(mouseIsInArea && !mouseIsPressed)
+                    else if (mouseIsInArea && !mouseIsPressed)
                         state = ViewState.ENTER;
 
                     break;
@@ -69,7 +78,7 @@ namespace GUILibrary.UI.View
                     break;
                 case ViewState.OVER:
                     // Trigger lifecycle method
-                    // Could call OnMouseOver here if implementation is needed
+                    OnMouseOver(mouseState);
 
                     // Transitions
                     if (mouseIsInArea && mouseIsPressed)
@@ -139,6 +148,11 @@ namespace GUILibrary.UI.View
         }
 
         protected virtual void OnMouseEnter(MouseState mouseState)
+        {
+
+        }
+
+        protected virtual void OnMouseOver(MouseState mouseState)
         {
 
         }

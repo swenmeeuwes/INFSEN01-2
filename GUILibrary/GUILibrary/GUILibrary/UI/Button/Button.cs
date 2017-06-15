@@ -52,31 +52,30 @@ namespace GUILibrary.UI.Button
 
         protected override void OnMouseDown(MouseState mouseState)
         {
+            base.OnMouseDown(mouseState);
             this.CurrentTexture = textures.ButtonDown;
         }
 
         protected override void OnMouseRelease(MouseState mouseState)
         {
-            // Quick hack to see if the mouse is still in the area
-            var mouseIsInArea = Bounds.Contains(new Point2D<int>(mouseState.Position.X, mouseState.Position.Y));
-            if (mouseIsInArea)
-            {
-                var eventObject = new Event("Click", this);
-                Notify(eventObject);
-
-                this.CurrentTexture = textures.ButtonOver;
-            }
-            else
-                this.CurrentTexture = textures.ButtonUp;
+            base.OnMouseRelease(mouseState);
         }
 
         protected override void OnMouseEnter(MouseState mouseState)
         {
+            base.OnMouseEnter(mouseState);
+            this.CurrentTexture = textures.ButtonOver;
+        }
+
+        protected override void OnMouseOver(MouseState mouseState)
+        {
+            base.OnMouseOver(mouseState);
             this.CurrentTexture = textures.ButtonOver;
         }
 
         protected override void OnMouseExit(MouseState mouseState)
         {
+            base.OnMouseExit(mouseState);
             this.CurrentTexture = textures.ButtonUp;
         }
     }

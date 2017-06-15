@@ -9,6 +9,6 @@ namespace GUILibrary.Util.Visitor
 {
     interface IOnClickVisitor
     {
-        void Visit(View element);
+        void HandleClick(View element);
     }
 }

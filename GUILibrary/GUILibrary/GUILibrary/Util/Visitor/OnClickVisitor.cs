@@ -4,26 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GUILibrary.UI.View;
-using Microsoft.Xna.Framework.Input;
 using GUILibrary.Util.Observable;
+using GUILibrary.Input;
+using GUILibrary.UI.View.State;
+using GUILibrary.Util.Structures;
 
 namespace GUILibrary.Util.Visitor
 {
     class OnClickVisitor : IOnClickVisitor
     {
-        public void Visit(View element)
+        public void HandleClick(View element)
         {
-            //var mouseState = Mouse.GetState();
-            //var mousePosition = mouseState.Position;
-
-            //var mouseIsInArea = element.Bounds.Contains(mouseState.Position);
-            //var mouseIsPressed = mouseState.LeftButton == ButtonState.Pressed || mouseState.MiddleButton == ButtonState.Pressed || mouseState.RightButton == ButtonState.Pressed;
-
-            //if (mouseIsInArea)
-            //{
-                var eventObject = new Event("Click", this);
+            var mouseState = InputManager.Instance.Mouse;
+            var mouseIsInArea = element.Bounds.Contains(new Point2D<int>(mouseState.Position.X, mouseState.Position.Y));
+            if (element.GetState() == ViewState.RELEASED && mouseIsInArea)
+            {
+                var eventObject = new Event("Click", element);
                 element.Notify(eventObject);
-            //}
+            }
         }
     }
 }

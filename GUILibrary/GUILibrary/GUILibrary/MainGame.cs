@@ -23,6 +23,7 @@ namespace GUILibrary
 
         DrawManager drawManager;
 
+        IOnClickVisitor onClickVisitor;
         IUpdateVisitor updateVisitor;
         IDrawVisitor drawVisitor;
 
@@ -42,7 +43,8 @@ namespace GUILibrary
         /// </summary>
         protected override void Initialize()
         {
-            // Initialization logic here            
+            // Initialization logic here
+            onClickVisitor = new OnClickVisitor();
             updateVisitor = new DefaultUpdateVisitor();
 
             // Configuration
@@ -100,6 +102,7 @@ namespace GUILibrary
 
             // Add your update logic here
             var deltaTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            mainWindow.HandleClick(onClickVisitor);
             mainWindow.Update(updateVisitor, deltaTime);
 
             base.Update(gameTime);
