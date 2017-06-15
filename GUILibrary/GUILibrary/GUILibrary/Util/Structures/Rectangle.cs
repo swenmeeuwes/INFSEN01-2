@@ -11,13 +11,23 @@ namespace GUILibrary.Util.Structures
     /// </summary>
     class Rectangle<T>
     {
-        public T X { get; set; }
-        public T Y { get; set; }
-        public T Width { get; set; }
-        public T Height { get; set; }
+        public dynamic X { get; set; }
+        public dynamic Y { get; set; }
+        public dynamic Width { get; set; }
+        public dynamic Height { get; set; }
 
-        //public bool Contains(Point2D<T> point)
-                        
-        //}
+        public Rectangle(T x, T y, T w, T h)
+        {
+            X = x;
+            Y = y;
+            Width = w;
+            Height = h;
+        }
+
+        public bool Contains(Point2D<T> point)
+        {
+            return point.X > X && point.X < X + Width
+                && point.Y > Y && point.Y < Y + Height;
+        }
     }
 }

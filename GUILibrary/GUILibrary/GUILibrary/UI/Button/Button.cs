@@ -3,8 +3,8 @@ using GUILibrary.Input;
 using GUILibrary.UI.Label;
 using GUILibrary.UI.View.State;
 using GUILibrary.Util.Observable;
+using GUILibrary.Util.Structures;
 using GUILibrary.Util.Visitor;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -20,14 +20,16 @@ namespace GUILibrary.UI.Button
         public Texture2D CurrentTexture { get; private set; }
 
         private ButtonTextureWrapper textures;
-        public Button(string text, Vector2 position)
+        public Button(string text, Point2D<int> position)
         {
             this.Position = position;            
             this.Label = new Label.Label(text, Position);
-            this.Size = Label.Font.MeasureString(text);
+
+            var measuredSize = Label.Font.MeasureString(text);
+            this.Size = new Vector2<int>((int)measuredSize.X, (int)measuredSize.Y);
 
             // Temp
-            this.Color = Color.White;
+            Color = Color.White;
 
             // Flyweight pattern could be useful here, we don't need multiple instances of the textures
             this.textures = new ButtonTextureWrapper(
@@ -56,7 +58,7 @@ namespace GUILibrary.UI.Button
         protected override void OnMouseRelease(MouseState mouseState)
         {
             // Quick hack to see if the mouse is still in the area
-            var mouseIsInArea = Bounds.Contains(new Point(mouseState.Position.X, mouseState.Position.Y));
+            var mouseIsInArea = Bounds.Contains(new Point2D<int>(mouseState.Position.X, mouseState.Position.Y));
             if (mouseIsInArea)
             {
                 var eventObject = new Event("Click", this);

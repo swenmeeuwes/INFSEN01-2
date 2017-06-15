@@ -79,8 +79,10 @@
     <Compile Include="Util\Observable\IObservable.cs" />
     <Compile Include="Util\Observable\IObserver.cs" />
     <Compile Include="Util\Observable\ActionObserver.cs" />
+    <Compile Include="Util\Structures\Color.cs" />
     <Compile Include="Util\Structures\Point2D.cs" />
     <Compile Include="Util\Structures\Rectangle.cs" />
+    <Compile Include="Util\Structures\Vector2.cs" />
     <Compile Include="Util\Visitor\DefaultDrawVisitor.cs" />
     <Compile Include="Util\Visitor\DefaultUpdateVisitor.cs" />
     <Compile Include="Util\Visitor\IDrawVisitor.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="Util\Visitor\OnClickVisitor.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
@@ -112,6 +115,8 @@
   <ItemGroup>
     <Folder Include="Content\Assets\Fonts\" />
     <Folder Include="Content\Assets\Images\" />
+    <Folder Include="Graphics\Font\" />
+    <Folder Include="Graphics\Texture\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

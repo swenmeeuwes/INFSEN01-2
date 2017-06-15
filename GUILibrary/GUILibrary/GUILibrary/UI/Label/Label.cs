@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GUILibrary.Util.Visitor;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using GUILibrary.AssetLoading;
+using GUILibrary.Util.Structures;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GUILibrary.UI.Label
 {
@@ -16,7 +16,7 @@ namespace GUILibrary.UI.Label
         public TextAlign Align { get; set; } = TextAlign.LEFT;
         public SpriteFont Font { get; set; }
 
-        public Label(string text, Vector2 position)
+        public Label(string text, Point2D<int> position)
         {
             this.Text = text;
             this.Position = position;
@@ -24,6 +24,9 @@ namespace GUILibrary.UI.Label
             // Use a font as "default" label font
             this.Font = AssetLibrary.Instance.RetrieveAsset<SpriteFont>("Arial");
             this.Color = Color.Black;
+
+            var measuredSize = Font.MeasureString(text);
+            this.Size = new Vector2<int>((int)measuredSize.X, (int)measuredSize.Y);
         }
         public Label(string text, SpriteFont font)
         {

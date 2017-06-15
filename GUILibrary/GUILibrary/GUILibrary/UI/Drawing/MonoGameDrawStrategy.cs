@@ -19,7 +19,11 @@ namespace GUILibrary.UI.Drawing
         }
         public void Draw(Button.Button element)
         {
-            spriteBatch.Draw(element.CurrentTexture, element.Bounds, element.Color);
+            spriteBatch.Draw(
+                element.CurrentTexture, 
+                new Rectangle(element.Bounds.X, element.Bounds.Y, element.Bounds.Width, element.Bounds.Height), 
+                new Color(element.Color.R, element.Color.G, element.Color.B, element.Color.A)
+            );
         }
 
         public void Draw(Label.Label element)
@@ -41,7 +45,7 @@ namespace GUILibrary.UI.Drawing
                     break;
             }
 
-            spriteBatch.DrawString(element.Font, element.Text, calculatedPosition, element.Color);
+            spriteBatch.DrawString(element.Font, element.Text, calculatedPosition, new Color(element.Color.R, element.Color.G, element.Color.B, element.Color.A));
         }
     }
 }

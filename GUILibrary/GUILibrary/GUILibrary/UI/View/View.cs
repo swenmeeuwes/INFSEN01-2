@@ -2,8 +2,8 @@
 using GUILibrary.UI.Drawing;
 using GUILibrary.UI.View.State;
 using GUILibrary.Util.Observable;
+using GUILibrary.Util.Structures;
 using GUILibrary.Util.Visitor;
-using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,14 +17,14 @@ namespace GUILibrary.UI.View
         public bool Visible { get; set; }
         public float Opacity { get; set; }
         public Color Color { get; set; }
-        public Vector2 Position { get; set; }
-        public Vector2 Size { get; set; }
+        public Point2D<int> Position { get; set; }
+        public Vector2<int> Size { get; set; }
         //public Vector2 Origin { get; set; }
-        public Rectangle Bounds // To-do: Make custom Rectangle class
+        public Rectangle<int> Bounds
         {
             get
             {
-                return new Rectangle(Position.ToPoint(), Size.ToPoint());
+                return new Rectangle<int>(Position.X, Position.Y, Size.X, Size.Y);
             }
         }
 
@@ -41,7 +41,7 @@ namespace GUILibrary.UI.View
 
         private void HandleState(MouseState mouseState)
         {
-            var mouseIsInArea = Bounds.Contains(new Point(mouseState.Position.X, mouseState.Position.Y));
+            var mouseIsInArea = Bounds.Contains(new Point2D<int>(mouseState.Position.X, mouseState.Position.Y));
             var mouseIsPressed = mouseState.LeftButton == ButtonState.PRESSED || mouseState.MiddleButton == ButtonState.PRESSED || mouseState.RightButton == ButtonState.PRESSED;
 
             switch (state)

@@ -4,6 +4,7 @@ using GUILibrary.UI.Drawing;
 using GUILibrary.UI.Label;
 using GUILibrary.UI.Window;
 using GUILibrary.Util.Observable;
+using GUILibrary.Util.Structures;
 using GUILibrary.Util.Visitor;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -63,14 +64,14 @@ namespace GUILibrary
             // Load your game content here  
             AssetLoadService.Instance.LoadAssets(Content);
 
-            var aButton = new Button("This be a button", new Vector2(100, 100));
+            var aButton = new Button("This be a button", new Point2D<int>(100, 100));
             var printObserver = new ActionObserver(e => { Console.WriteLine(((Button)e.Target).Label.Text + " " + e.Type); });
             aButton.RegisterObserver(printObserver);
 
             // Todo: Implement mediators ... 
             mainWindow = new GUIWindow("main",
                 aButton,
-                new Label("0", new Vector2(GraphicsDevice.Viewport.Bounds.Width - 5, 5)) { Align = TextAlign.RIGHT }
+                new Label("0", new Point2D<int>(GraphicsDevice.Viewport.Bounds.Width - 5, 5)) { Align = TextAlign.RIGHT }
             );
 
             drawManager = new DrawManager(new MonoGameDrawStrategy(spriteBatch));
@@ -110,7 +111,7 @@ namespace GUILibrary
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.CornflowerBlue);
 
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp); // SamplerState.PointClamp disables smooth/ blurry stretching of textures
 
