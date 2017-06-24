@@ -6,19 +6,24 @@ using System.Threading.Tasks;
 using GUILibrary.UI.View;
 using GUILibrary.Input;
 using GUILibrary.UI.View.Decorators;
+using GUILibrary.Util.Structures;
+using Microsoft.Xna.Framework.Input;
 
 namespace GUILibrary.Util.Visitor
 {
     class DefaultUpdateVisitor : IUpdateVisitor
     {
-        public void Update(AbstractView element, float deltaTime)
+        public void Update(PlainView element, float deltaTime)
         {
-            //element.UpdateState(InputManager.Instance.Mouse);
+            element.UpdateState(InputManager.Instance.Mouse);
         }
 
         public void Update(Clickable element, float deltaTime)
         {
-            
+            var mouseState = InputManager.Instance.Mouse;
+            var mouseIsInArea = element.Bounds.Contains(new Point2D<int>(mouseState.Position.X, mouseState.Position.Y));
+            if (mouseIsInArea)
+                Mouse.SetCursor(MouseCursor.Hand); // Probably make an adapter for this
         }
 
         public void Update(Labeled element, float deltaTime)

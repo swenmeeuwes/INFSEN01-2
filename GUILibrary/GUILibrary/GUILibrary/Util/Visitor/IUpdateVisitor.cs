@@ -10,6 +10,7 @@ namespace GUILibrary.Util.Visitor
 {
     interface IUpdateVisitor
     {
+        void Update(PlainView element, float deltaTime);
         void Update(Clickable element, float deltaTime);
         void Update(Labeled element, float deltaTime);        
     }

@@ -15,7 +15,6 @@ namespace GUILibrary.UI.View
     {
         public override bool Visible { get; set; }
         public override float Opacity { get; set; }
-        public override Color Color { get; set; }
         public override Point2D<int> Position { get; set; }
         public override Vector2<int> Size { get; set; }
         //public Vector2 Origin { get; set; }

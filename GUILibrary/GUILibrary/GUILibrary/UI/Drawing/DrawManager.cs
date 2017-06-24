@@ -23,7 +23,11 @@ namespace GUILibrary.UI.Drawing
 
         public void Draw(Clickable element)
         {
-            throw new NotImplementedException();
+            drawStrategy.Draw(element);
+        }
+        public void Draw(Panel element)
+        {
+            drawStrategy.Draw(element);
         }
     }
 }

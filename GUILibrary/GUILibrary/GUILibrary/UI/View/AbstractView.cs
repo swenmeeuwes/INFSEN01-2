@@ -15,8 +15,7 @@ namespace GUILibrary.UI.View
     abstract class AbstractView : IDrawable, IObservable, IUpdatable
     {
         public abstract bool Visible { get; set; }
-        public abstract float Opacity { get; set; }
-        public abstract Color Color { get; set; }
+        public abstract float Opacity { get; set; }        
         public abstract Point2D<int> Position { get; set; }
         public abstract Vector2<int> Size { get; set; }
         //public abstract Vector2 Origin { get; set; }

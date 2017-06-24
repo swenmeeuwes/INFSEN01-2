@@ -19,7 +19,6 @@ namespace GUILibrary.UI.View.Decorators
 
         public override bool Visible { get => view.Visible; set => view.Visible = value; }
         public override float Opacity { get => view.Opacity; set => view.Opacity = value; }
-        public override Color Color { get => view.Color; set => view.Color = value; }
         public override Point2D<int> Position { get => view.Position; set => view.Position = value; }
         public override Vector2<int> Size { get => view.Size; set => view.Size = value; }
 

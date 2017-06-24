@@ -34,12 +34,12 @@ namespace GUILibrary.UI.Window
 
         public void HandleClick(IOnClickVisitor onClickVisitor)
         {
-            //var viewIterator = views.GetIterator();
-            //while (viewIterator.HasNext())
-            //{
-            //    var view = viewIterator.Next();
-            //    view.HandleClick(onClickVisitor);
-            //}
+            var viewIterator = views.GetIterator();
+            while (viewIterator.HasNext())
+            {
+                var view = viewIterator.Next();
+                view.HandleClick(onClickVisitor);
+            }
         }
 
         public void Update(IUpdateVisitor updateVisitor, float deltaTime)

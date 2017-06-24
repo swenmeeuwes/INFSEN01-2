@@ -17,18 +17,29 @@ namespace GUILibrary.UI.View.Decorators
         public string Text { get; set; }
         public TextAlign Align { get; set; } = TextAlign.LEFT;
         public SpriteFont Font { get; set; }
+        public Color FontColor { get; set; }
 
-        public Labeled(AbstractView view, string text) : base(view)
+        public Labeled(AbstractView view, string text, TextAlign textAlign) : base(view)
         {
             // Use a font as "default" label font
-            this.Font = AssetLibrary.Instance.RetrieveAsset<SpriteFont>("Arial");
-            this.Color = Color.Black;
+            Font = AssetLibrary.Instance.RetrieveAsset<SpriteFont>("Arial");
+            FontColor = Color.Black;
             
-            this.Text = text;
+            Text = text;
+            Align = textAlign;
         }
         public override void Draw(IDrawVisitor visitor)
         {
             visitor.Draw(this);
+            view.Draw(visitor);
+        }
+        public override void Update(IUpdateVisitor visitor, float deltaTime)
+        {            
+            view.Update(visitor, deltaTime);
+        }
+        public override void HandleClick(IOnClickVisitor onClickVisitor)
+        {
+            view.HandleClick(onClickVisitor);
         }
     }
 }

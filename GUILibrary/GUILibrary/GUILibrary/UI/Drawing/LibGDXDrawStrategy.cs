@@ -31,5 +31,10 @@ namespace GUILibrary.UI.Drawing
         {
             throw new NotImplementedException();
         }
+
+        public void Draw(Panel element)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

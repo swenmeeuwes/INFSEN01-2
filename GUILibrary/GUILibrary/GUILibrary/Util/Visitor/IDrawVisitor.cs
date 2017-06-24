@@ -12,5 +12,6 @@ namespace GUILibrary.Util.Visitor
     {
         void Draw(Clickable element);
         void Draw(Labeled element);
+        void Draw(Panel element);
     }
 }

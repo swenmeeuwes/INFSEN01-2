@@ -1,5 +1,6 @@
 ﻿using GUILibrary.AssetLoading;
 using GUILibrary.UI.Drawing;
+using GUILibrary.UI.Label;
 using GUILibrary.UI.View;
 using GUILibrary.UI.View.Decorators;
 using GUILibrary.UI.Window;
@@ -67,13 +68,16 @@ namespace GUILibrary
             AssetLoadService.Instance.LoadAssets(Content);
 
             //var aButton = new Button("This be a button", new Point2D<int>(100, 100));
-            //var printObserver = new ActionObserver(e => { Console.WriteLine(((Button)e.Target).Label.Text + " " + e.Type); });
+            var printObserver = new ActionObserver(e => { Console.WriteLine(((AbstractView)e.Target).Position.X + " " + e.Type); });
             //aButton.RegisterObserver(printObserver);
 
-            var decButton = new Labeled(
-                                new Clickable(
-                                    new PlainView(new Point2D<int>(150, 150), new Vector2<int>(100, 48))
-                                ), "Test");
+            var decButton = new Panel(
+                                new Labeled(
+                                    new PlainView(new Point2D<int>(150, 150), new Vector2<int>(100, 48)),
+                                    "Test",
+                                    TextAlign.CENTER
+                                )
+                            );
 
             // Todo: Implement mediators ... 
             mainWindow = new GUIWindow("main",
@@ -82,7 +86,7 @@ namespace GUILibrary
             //new Label("0", new Point2D<int>(GraphicsDevice.Viewport.Bounds.Width - 5, 5)) { Align = TextAlign.RIGHT }
             );
 
-            drawManager = new DrawManager(new MonoGameDrawStrategy(spriteBatch)); // Add contentmanager in the monogame draw strategy
+            drawManager = new DrawManager(new MonoGameDrawStrategy(spriteBatch, graphics, Content)); // Add contentmanager in the monogame draw strategy
             drawVisitor = new DefaultDrawVisitor(drawManager);
         }
 
