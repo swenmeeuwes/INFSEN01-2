@@ -17,6 +17,10 @@ namespace GUILibrary.Util.Structures
         {
             X = x;
             Y = y;
-        }        
+        }
+        public static Point2D<T> operator +(Point2D<T> p1, Point2D<T> p2)
+        {
+            return new Point2D<T>(p1.X + p2.X, p1.Y + p2.Y);
+        }
     }
 }

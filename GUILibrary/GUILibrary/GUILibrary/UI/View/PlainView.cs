@@ -163,20 +163,5 @@ namespace GUILibrary.UI.View
         {
 
         }
-
-        public override void Notify(Event eventObject)
-        {
-            base.Notify(eventObject);
-        }
-
-        public override void RegisterObserver(IObserver observer)
-        {
-            base.RegisterObserver(observer);
-        }
-
-        public override void DeregisterObserver(IObserver observer)
-        {
-            base.DeregisterObserver(observer);
-        }
     }
 }

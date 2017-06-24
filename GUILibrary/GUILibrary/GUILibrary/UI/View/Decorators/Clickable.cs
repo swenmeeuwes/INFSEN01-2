@@ -10,10 +10,14 @@ namespace GUILibrary.UI.View.Decorators
 {
     class Clickable : ViewDecorator
     {
-
-        public Clickable(AbstractView view, ActionObserver actionObserver) : base(view)
+        public Action<AbstractView> Action { get; set; }
+        public Clickable(AbstractView view, Action<AbstractView> action) : base(view)
         {
-            view.RegisterObserver(actionObserver);
+            Action = action;
+        }
+        public override void Draw(IDrawVisitor visitor)
+        {
+            view.Draw(visitor);
         }
         public override void Update(IUpdateVisitor visitor, float deltaTime)
         {
@@ -24,6 +28,6 @@ namespace GUILibrary.UI.View.Decorators
         {
             visitor.HandleClick(this);
             view.HandleClick(visitor);
-        }
+        }        
     }
 }

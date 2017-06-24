@@ -26,9 +26,10 @@ namespace GUILibrary.Util.Visitor
             var mouseState = InputManager.Instance.Mouse;
             var mouseIsInArea = clickable.Bounds.Contains(new Point2D<int>(mouseState.Position.X, mouseState.Position.Y));
             if (mouseState.LeftButton == ButtonState.RELEASED && previousMouseState.LeftButton == ButtonState.PRESSED && mouseIsInArea)
-            {                
-                var eventObject = new Event("Click", clickable);
-                clickable.Notify(eventObject);
+            {
+                //var eventObject = new Event("Click", clickable);
+                //clickable.Notify(eventObject);
+                clickable.Action.Invoke(clickable);
             }
             previousMouseState = mouseState;
         }

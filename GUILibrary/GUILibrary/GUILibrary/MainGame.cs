@@ -71,22 +71,22 @@ namespace GUILibrary
             var printObserver = new ActionObserver(e => { Console.WriteLine(((AbstractView)e.Target).Position.X + " " + e.Type); });
             //aButton.RegisterObserver(printObserver);
 
-            var decButton = new Panel(
-                                new Labeled(
-                                    new PlainView(new Point2D<int>(150, 150), new Vector2<int>(100, 48)),
-                                    "Test",
-                                    TextAlign.CENTER
-                                )
+            var decButton = new Clickable(
+                                new Panel(
+                                    new Labeled(
+                                        new PlainView(new Point2D<int>(150, 150), new Vector2<int>(100, 48)),
+                                        "Test",
+                                        (TextAlign)((int)TextAlign.CENTER + (int)TextAlign.MIDDLE)
+                                    )
+                                ), (v => v.Position += new Point2D<int>(5, 0))
                             );
 
             // Todo: Implement mediators ... 
             mainWindow = new GUIWindow("main",
                 decButton
-            //aButton,
-            //new Label("0", new Point2D<int>(GraphicsDevice.Viewport.Bounds.Width - 5, 5)) { Align = TextAlign.RIGHT }
             );
 
-            drawManager = new DrawManager(new MonoGameDrawStrategy(spriteBatch, graphics, Content)); // Add contentmanager in the monogame draw strategy
+            drawManager = new DrawManager(new MonoGameDrawStrategy(spriteBatch, graphics, Content));
             drawVisitor = new DefaultDrawVisitor(drawManager);
         }
 
