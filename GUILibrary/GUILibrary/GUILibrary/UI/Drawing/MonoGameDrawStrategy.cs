@@ -35,18 +35,23 @@ namespace GUILibrary.UI.Drawing
         {
             var measuredStringSize = element.Font.MeasureString(element.Text);
 
-            Vector2 calculatedPosition;
-            switch (element.Align)
+            Vector2 calculatedPosition = new Vector2(element.Bounds.X, element.Bounds.Y);
+            switch ((int)element.Align)
             {
-                case TextAlign.CENTER:
-                    calculatedPosition = new Vector2(element.Bounds.X + element.Bounds.Width / 2 - measuredStringSize.X / 2, element.Bounds.Y);
+                case (int)TextAlign.LEFT:
+                    calculatedPosition = new Vector2(element.Bounds.X, element.Bounds.Y);
                     break;
-                case TextAlign.RIGHT:
+                case (int)TextAlign.RIGHT:
                     calculatedPosition = new Vector2(element.Bounds.X - measuredStringSize.X, element.Bounds.Y);
                     break;
-                case TextAlign.LEFT:
-                default:
-                    calculatedPosition = new Vector2(element.Bounds.X, element.Bounds.Y);
+                case (int)TextAlign.CENTER:
+                    calculatedPosition = new Vector2(element.Bounds.X + element.Bounds.Width / 2 - measuredStringSize.X / 2, element.Bounds.Y);
+                    break;
+                case (int)TextAlign.CENTER + (int)TextAlign.MIDDLE:
+                    calculatedPosition = new Vector2(element.Bounds.X + element.Bounds.Width / 2 - measuredStringSize.X / 2, element.Bounds.Y + element.Bounds.Height / 2 - measuredStringSize.Y / 2);
+                    break;
+                case (int)TextAlign.CENTER + (int)TextAlign.BOTTOM:
+                    calculatedPosition = new Vector2(element.Bounds.X + element.Bounds.Width / 2 - measuredStringSize.X / 2, element.Bounds.Y + element.Bounds.Height - measuredStringSize.Y);
                     break;
             }
 

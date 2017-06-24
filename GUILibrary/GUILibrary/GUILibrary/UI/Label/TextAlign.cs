@@ -8,15 +8,11 @@ namespace GUILibrary.UI.Label
 {
     enum TextAlign
     {
-        CENTER = 0,
-        LEFT = 1,
-        RIGHT = 2
-        //TOP = 4,
-        //BOTTOM = 8
-
-        // Maybe go for:
-        // TOPLEFT
-        // TOPRIGHT
-        // + strategy
+        LEFT = 0,
+        RIGHT = 1,
+        CENTER = 2,
+        TOP = 3,
+        BOTTOM = 6,
+        MIDDLE = 9
     }
 }
