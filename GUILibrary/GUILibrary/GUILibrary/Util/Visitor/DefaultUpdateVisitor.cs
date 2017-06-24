@@ -35,5 +35,12 @@ namespace GUILibrary.Util.Visitor
         {
 
         }
+
+        public void Update(TextInput element, float deltaTime)
+        {
+            var pressedKeys = inputAdapter.GetPressedKeys();
+            if (element.Selected && pressedKeys.Length > 0)
+                element.HandleInput(pressedKeys);
+        }
     }
 }

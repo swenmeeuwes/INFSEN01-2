@@ -12,5 +12,6 @@ namespace GUILibrary.UI.Drawing
         void Draw(Button element);
         void Draw(View.Decorators.Label element);
         void Draw(Panel element);
+        void Draw(TextInput element);
     }
 }

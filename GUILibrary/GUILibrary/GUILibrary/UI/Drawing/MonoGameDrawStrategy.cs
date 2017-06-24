@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework;
 using GUILibrary.UI.Label;
 using GUILibrary.UI.View.Decorators;
 using Microsoft.Xna.Framework.Content;
+using GUILibrary.UI.View.State;
 
 namespace GUILibrary.UI.Drawing
 {
@@ -78,6 +79,16 @@ namespace GUILibrary.UI.Drawing
             rectangle.SetData(data);
 
             spriteBatch.Draw(rectangle, new Vector2(element.Position.X, element.Position.Y), Color.White);
+        }
+
+        public void Draw(TextInput element)
+        {
+            var measuredStringSize = element.Font.MeasureString("how tall is this");
+            var calculatedPosition = new Vector2(element.Bounds.X + 4, element.Bounds.Y + element.Bounds.Height / 2 - measuredStringSize.Y / 2);
+            if (element.Content.Length > 0)
+                spriteBatch.DrawString(element.Font, element.Content, calculatedPosition, new Color(element.FontColor.R, element.FontColor.G, element.FontColor.B, element.FontColor.A));
+            else
+                spriteBatch.DrawString(element.Font, element.Placeholder, calculatedPosition, Color.Gray);
         }
     }
 }

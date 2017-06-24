@@ -16,25 +16,34 @@ namespace GUILibrary.Util.Visitor
     {
         private IInputAdapter inputAdapter;
         private MouseState previousMouseState;
+        private MouseState mouseState;
 
         public OnClickVisitor(IInputAdapter inputAdapter)
         {
             this.inputAdapter = inputAdapter;
 
             previousMouseState = inputAdapter.GetMouseState();
+            mouseState = inputAdapter.GetMouseState();
         }
 
-        public void HandleClick(Button clickable)
+        public void HandleClick(Button element)
         {
-            var mouseState = inputAdapter.GetMouseState();
-            var mouseIsInArea = clickable.Bounds.Contains(new Point2D<int>(mouseState.Position.X, mouseState.Position.Y));
+            var mouseIsInArea = element.Bounds.Contains(new Point2D<int>(mouseState.Position.X, mouseState.Position.Y));
             if (mouseState.LeftButton == ButtonState.RELEASED && previousMouseState.LeftButton == ButtonState.PRESSED && mouseIsInArea)
-            {
-                //var eventObject = new Event("Click", clickable);
-                //clickable.Notify(eventObject);
-                clickable.Action.Invoke(clickable);
-            }
+                element.Action.Invoke(element);            
+        }
+
+        public void HandleClick(TextInput element)
+        {
+            var mouseIsInArea = element.Bounds.Contains(new Point2D<int>(mouseState.Position.X, mouseState.Position.Y));
+            if (mouseState.LeftButton == ButtonState.RELEASED && previousMouseState.LeftButton == ButtonState.PRESSED && mouseIsInArea)            
+                element.Selected = true;
+        }
+
+        public void UpdateMouseState()
+        {
             previousMouseState = mouseState;
+            mouseState = inputAdapter.GetMouseState();
         }
     }
 }

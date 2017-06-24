@@ -29,5 +29,9 @@ namespace GUILibrary.UI.Drawing
         {
             drawStrategy.Draw(element);
         }
+        public void Draw(TextInput element)
+        {
+            drawStrategy.Draw(element);
+        }
     }
 }

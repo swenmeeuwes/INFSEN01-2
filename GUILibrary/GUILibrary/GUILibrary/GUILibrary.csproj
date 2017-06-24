@@ -48,6 +48,7 @@
     <Compile Include="AssetLoading\Model\ManifestModel.cs" />
     <Compile Include="Input\IInputAdapter.cs" />
     <Compile Include="Input\ButtonState.cs" />
+    <Compile Include="Input\Model\Key.cs" />
     <Compile Include="Input\MonoGameInputAdapter.cs" />
     <Compile Include="Input\MouseState.cs" />
     <Compile Include="MainGame.cs" />

@@ -36,5 +36,10 @@ namespace GUILibrary.UI.Drawing
         {
             throw new NotImplementedException();
         }
+
+        public void Draw(TextInput element)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

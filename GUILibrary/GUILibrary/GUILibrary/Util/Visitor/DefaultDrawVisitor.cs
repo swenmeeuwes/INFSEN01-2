@@ -32,5 +32,10 @@ namespace GUILibrary.Util.Visitor
         {
             drawManager.Draw(element);
         }
+
+        public void Draw(TextInput element)
+        {
+            drawManager.Draw(element);
+        }
     }
 }

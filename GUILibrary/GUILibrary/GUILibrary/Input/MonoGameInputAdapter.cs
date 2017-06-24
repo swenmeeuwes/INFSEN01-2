@@ -1,4 +1,5 @@
-﻿using GUILibrary.Util.Structures;
+﻿using GUILibrary.Input.Model;
+using GUILibrary.Util.Structures;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,13 @@ namespace GUILibrary.Input
 {
     class MonoGameInputAdapter : IInputAdapter
     {
+        public Key[] GetPressedKeys()
+        {
+            return Keyboard.GetState()
+                .GetPressedKeys()
+                .Select(key => new Key() { KeyCode = (int)key, KeyName = key.ToString() })
+                .ToArray();
+        }
         public MouseState GetMouseState()
         {
             var monoGameMouseState = Mouse.GetState();

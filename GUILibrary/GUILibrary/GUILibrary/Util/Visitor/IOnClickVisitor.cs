@@ -1,4 +1,5 @@
-﻿using GUILibrary.UI.View.Decorators;
+﻿using GUILibrary.Input;
+using GUILibrary.UI.View.Decorators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace GUILibrary.Util.Visitor
 {
     interface IOnClickVisitor
     {
+        void UpdateMouseState();
+
         void HandleClick(Button element);
         void HandleClick(TextInput element);
     }

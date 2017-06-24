@@ -12,6 +12,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Linq;
 
 namespace GUILibrary
 {
@@ -85,9 +86,17 @@ namespace GUILibrary
                                 ), (v => v.Position += new Point2D<int>(5, 0))
                             );
 
+            var decInput = new Panel(
+                                new TextInput(                                                                   
+                                    new PlainView(new Point2D<int>(150, 250), new Vector2<int>(100, 24)),
+                                    "PLACEHOLDER"
+                                )
+                            );
+
             // Todo: Implement mediators ... 
             mainWindow = new GUIWindow("main",
-                decButton
+                decButton,
+                decInput
             );
 
             drawManager = new DrawManager(new MonoGameDrawStrategy(spriteBatch, graphics, Content));
@@ -116,6 +125,9 @@ namespace GUILibrary
 
             // Add your update logic here
             var deltaTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            onClickVisitor.UpdateMouseState();
+
             mainWindow.HandleClick(onClickVisitor);
             mainWindow.Update(updateVisitor, deltaTime);
 
