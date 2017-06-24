@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GUILibrary.UI.Button;
 using Microsoft.Xna.Framework.Graphics;
 using GUILibrary.UI.Label;
 using Microsoft.Xna.Framework;
 using GUILibrary.UI.Drawing;
+using GUILibrary.UI.View.Decorators;
 
 namespace GUILibrary.Util.Visitor
 {
@@ -18,12 +18,12 @@ namespace GUILibrary.Util.Visitor
         {
             this.drawManager = drawManager;
         }      
-        public void Draw(Button element)
+        public void Draw(Clickable element)
         {
             drawManager.Draw(element);        
         }
 
-        public void Draw(Label element)
+        public void Draw(Labeled element)
         {
             drawManager.Draw(element);
         }

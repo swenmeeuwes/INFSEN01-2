@@ -13,20 +13,20 @@ namespace GUILibrary.UI.Window
     class GUIWindow : IUpdatable, IDrawable
     {
         public string Id { get; set; }
-        CustomList<View.View> views;
+        CustomList<View.AbstractView> views;
 
         public GUIWindow(string id)
         {
             Id = id;
-            views = new CustomList<View.View>();
+            views = new CustomList<View.AbstractView>();
         }
-        public GUIWindow(string id, params View.View[] viewElements)
+        public GUIWindow(string id, params AbstractView[] viewElements)
         {
             Id = id;
             views = viewElements.ToCustomList();
         }
 
-        public GUIWindow(string id, CustomList<View.View> viewElements)
+        public GUIWindow(string id, CustomList<AbstractView> viewElements)
         {
             Id = id;
             views = viewElements;
@@ -34,12 +34,12 @@ namespace GUILibrary.UI.Window
 
         public void HandleClick(IOnClickVisitor onClickVisitor)
         {
-            var viewIterator = views.GetIterator();
-            while (viewIterator.HasNext())
-            {
-                var view = viewIterator.Next();
-                view.HandleClick(onClickVisitor);
-            }
+            //var viewIterator = views.GetIterator();
+            //while (viewIterator.HasNext())
+            //{
+            //    var view = viewIterator.Next();
+            //    view.HandleClick(onClickVisitor);
+            //}
         }
 
         public void Update(IUpdateVisitor updateVisitor, float deltaTime)

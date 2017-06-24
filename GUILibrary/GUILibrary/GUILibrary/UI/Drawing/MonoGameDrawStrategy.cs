@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GUILibrary.UI.Button;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using GUILibrary.UI.Label;
+using GUILibrary.UI.View.Decorators;
 
 namespace GUILibrary.UI.Drawing
 {
@@ -17,16 +17,16 @@ namespace GUILibrary.UI.Drawing
         {
             this.spriteBatch = spriteBatch;
         }
-        public void Draw(Button.Button element)
+        public void Draw(Clickable element)
         {
-            spriteBatch.Draw(
-                element.CurrentTexture, 
-                new Rectangle(element.Bounds.X, element.Bounds.Y, element.Bounds.Width, element.Bounds.Height), 
-                new Color(element.Color.R, element.Color.G, element.Color.B, element.Color.A)
-            );
+            //spriteBatch.Draw(
+            //    element.CurrentTexture, 
+            //    new Rectangle(element.Bounds.X, element.Bounds.Y, element.Bounds.Width, element.Bounds.Height), 
+            //    new Color(element.Color.R, element.Color.G, element.Color.B, element.Color.A)
+            //);
         }
 
-        public void Draw(Label.Label element)
+        public void Draw(Labeled element)
         {
             var measuredStringSize = element.Font.MeasureString(element.Text);
 

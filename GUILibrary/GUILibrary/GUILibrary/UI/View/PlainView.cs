@@ -1,51 +1,54 @@
-﻿using GUILibrary.Input;
-using GUILibrary.UI.Drawing;
-using GUILibrary.UI.View.State;
-using GUILibrary.Util.Observable;
-using GUILibrary.Util.Structures;
-using GUILibrary.Util.Visitor;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GUILibrary.Util.Visitor;
+using GUILibrary.UI.View.State;
+using GUILibrary.Util.Observable;
+using GUILibrary.Util.Structures;
+using GUILibrary.Input;
 
 namespace GUILibrary.UI.View
 {
-    abstract class View : Drawing.IDrawable, IObservable, IUpdatable
+    class PlainView : AbstractView
     {
-        public bool Visible { get; set; }
-        public float Opacity { get; set; }
-        public Color Color { get; set; }
-        public Point2D<int> Position { get; set; }
-        public Vector2<int> Size { get; set; }
+        public override bool Visible { get; set; }
+        public override float Opacity { get; set; }
+        public override Color Color { get; set; }
+        public override Point2D<int> Position { get; set; }
+        public override Vector2<int> Size { get; set; }
         //public Vector2 Origin { get; set; }
-        public Rectangle<int> Bounds
+        public override Rectangle<int> Bounds
         {
             get
             {
                 return new Rectangle<int>(Position.X, Position.Y, Size.X, Size.Y);
             }
         }
+        public override ViewState State { get; set; }
 
-        protected List<IObserver> observers = new List<IObserver>();
-        protected ViewState state = ViewState.IDLE;
-
-        public abstract void Draw(IDrawVisitor drawVisitor);
-
-        public virtual void HandleClick(IOnClickVisitor onClickVisitor)
+        public PlainView(Point2D<int> position, Vector2<int> size)
         {
-            onClickVisitor.HandleClick(this);
+            State = ViewState.IDLE;
+
+            Position = position;
+            Size = size;
         }
 
-        public virtual void Update(IUpdateVisitor updateVisitor, float deltaTime)
+        public override void Draw(IDrawVisitor drawVisitor)
         {
-            updateVisitor.Update(this, deltaTime);
+            // Did you know? A plain view is also a ninja, so they can hide themselves really well!
         }
 
-        public ViewState GetState()
+        public override void Update(IUpdateVisitor updateVisitor, float deltaTime)
         {
-            return state;
+            
+        }
+
+        public override void HandleClick(IOnClickVisitor onClickVisitor)
+        {
+            // And because ninja's arent visible, you cannot click them!
         }
 
         public void UpdateState(MouseState mouseState)
@@ -53,14 +56,14 @@ namespace GUILibrary.UI.View
             var mouseIsInArea = Bounds.Contains(new Point2D<int>(mouseState.Position.X, mouseState.Position.Y));
             var mouseIsPressed = mouseState.LeftButton == ButtonState.PRESSED || mouseState.MiddleButton == ButtonState.PRESSED || mouseState.RightButton == ButtonState.PRESSED;
 
-            switch (state)
+            switch (State)
             {
                 case ViewState.IDLE:
                     // Transitions
                     if (mouseIsInArea && mouseIsPressed)
-                        state = ViewState.PRESSED;
+                        State = ViewState.PRESSED;
                     else if (mouseIsInArea && !mouseIsPressed)
-                        state = ViewState.ENTER;
+                        State = ViewState.ENTER;
 
                     break;
                 case ViewState.ENTER:
@@ -69,11 +72,11 @@ namespace GUILibrary.UI.View
 
                     // Transitions
                     if (mouseIsInArea && mouseIsPressed)
-                        state = ViewState.PRESSED;
+                        State = ViewState.PRESSED;
                     else if (mouseIsInArea && !mouseIsPressed)
-                        state = ViewState.OVER;
+                        State = ViewState.OVER;
                     else if (!mouseIsInArea && !mouseIsPressed)
-                        state = ViewState.EXIT;
+                        State = ViewState.EXIT;
 
                     break;
                 case ViewState.OVER:
@@ -82,18 +85,18 @@ namespace GUILibrary.UI.View
 
                     // Transitions
                     if (mouseIsInArea && mouseIsPressed)
-                        state = ViewState.PRESSED;
+                        State = ViewState.PRESSED;
                     else if (mouseIsInArea && !mouseIsPressed)
-                        state = ViewState.OVER;
+                        State = ViewState.OVER;
                     else if (!mouseIsInArea)
-                        state = ViewState.EXIT;
+                        State = ViewState.EXIT;
                     break;
                 case ViewState.EXIT:
                     // Trigger lifecycle method
                     OnMouseExit(mouseState);
 
                     // Transitions
-                    state = ViewState.IDLE;
+                    State = ViewState.IDLE;
 
                     break;
                 case ViewState.PRESSED:
@@ -102,9 +105,9 @@ namespace GUILibrary.UI.View
 
                     // Transitions
                     if (mouseIsPressed)
-                        state = ViewState.DOWN;
+                        State = ViewState.DOWN;
                     else
-                        state = ViewState.EXIT;
+                        State = ViewState.EXIT;
 
                     break;
                 case ViewState.DOWN:
@@ -113,9 +116,9 @@ namespace GUILibrary.UI.View
 
                     // Transitions
                     if (mouseIsPressed)
-                        state = ViewState.DOWN;
+                        State = ViewState.DOWN;
                     else
-                        state = ViewState.RELEASED;
+                        State = ViewState.RELEASED;
 
                     break;
                 case ViewState.RELEASED:
@@ -124,9 +127,9 @@ namespace GUILibrary.UI.View
 
                     // Transitions
                     if (mouseIsInArea)
-                        state = ViewState.OVER;
+                        State = ViewState.OVER;
                     else
-                        state = ViewState.EXIT;
+                        State = ViewState.EXIT;
 
                     break;
             }
@@ -144,7 +147,7 @@ namespace GUILibrary.UI.View
 
         protected virtual void OnMouseRelease(MouseState mouseState)
         {
-            
+
         }
 
         protected virtual void OnMouseEnter(MouseState mouseState)
@@ -162,19 +165,19 @@ namespace GUILibrary.UI.View
 
         }
 
-        public void RegisterObserver(IObserver observer)
+        public override void Notify(Event eventObject)
         {
-            observers.Add(observer);
+            base.Notify(eventObject);
         }
 
-        public void DeregisterObserver(IObserver observer)
+        public override void RegisterObserver(IObserver observer)
         {
-            observers.Remove(observer);
+            base.RegisterObserver(observer);
         }
 
-        public void Notify(Event eventObject)
+        public override void DeregisterObserver(IObserver observer)
         {
-            observers.ForEach(observer => observer.OnNotify(eventObject));
+            base.DeregisterObserver(observer);
         }
     }
 }

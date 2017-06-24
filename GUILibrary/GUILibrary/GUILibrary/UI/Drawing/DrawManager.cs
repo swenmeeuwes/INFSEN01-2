@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GUILibrary.UI.Button;
-using GUILibrary.UI.Label;
+using GUILibrary.UI.View.Decorators;
 
 namespace GUILibrary.UI.Drawing
 {
@@ -17,14 +16,14 @@ namespace GUILibrary.UI.Drawing
             this.drawStrategy = drawStrategy;
         }
 
-        public void Draw(Button.Button element)
+        public void Draw(Labeled element)
         {
             drawStrategy.Draw(element);
         }
 
-        public void Draw(Label.Label element)
+        public void Draw(Clickable element)
         {
-            drawStrategy.Draw(element);
+            throw new NotImplementedException();
         }
     }
 }
