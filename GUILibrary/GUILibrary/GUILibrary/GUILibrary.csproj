@@ -64,8 +64,9 @@
     <Compile Include="UI\Drawing\MonoGameDrawStrategy.cs" />
     <None Include="UI\Label\Label.cs.old" />
     <Compile Include="UI\Label\TextAlign.cs" />
-    <Compile Include="UI\View\Decorators\Clickable.cs" />
-    <Compile Include="UI\View\Decorators\Labeled.cs" />
+    <Compile Include="UI\View\Decorators\Button.cs" />
+    <Compile Include="UI\View\Decorators\TextInput.cs" />
+    <Compile Include="UI\View\Decorators\Label.cs" />
     <Compile Include="UI\View\Decorators\Panel.cs" />
     <Compile Include="UI\View\Decorators\ViewDecorator.cs" />
     <Compile Include="UI\View\IUpdatable.cs" />

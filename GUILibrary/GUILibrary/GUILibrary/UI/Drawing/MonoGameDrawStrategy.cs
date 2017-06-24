@@ -22,7 +22,7 @@ namespace GUILibrary.UI.Drawing
             this.graphicsDeviceManager = graphicsDeviceManager;
             this.contentManager = contentManager;
         }
-        public void Draw(Clickable element)
+        public void Draw(Button element)
         {
             //spriteBatch.Draw(
             //    element.CurrentTexture, 
@@ -31,7 +31,7 @@ namespace GUILibrary.UI.Drawing
             //);
         }
 
-        public void Draw(Labeled element)
+        public void Draw(View.Decorators.Label element)
         {
             var measuredStringSize = element.Font.MeasureString(element.Text);
 

@@ -1,5 +1,4 @@
-﻿using GUILibrary.UI.Label;
-using GUILibrary.UI.View.Decorators;
+﻿using GUILibrary.UI.View.Decorators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +9,9 @@ namespace GUILibrary.Util.Visitor
 {
     interface IDrawVisitor
     {
-        void Draw(Clickable element);
-        void Draw(Labeled element);
+        void Draw(Button element);
+        void Draw(Label element);
         void Draw(Panel element);
+        void Draw(TextInput element);
     }
 }

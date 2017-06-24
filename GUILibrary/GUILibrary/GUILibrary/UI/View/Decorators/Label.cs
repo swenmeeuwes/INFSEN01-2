@@ -12,14 +12,14 @@ using GUILibrary.AssetLoading;
 
 namespace GUILibrary.UI.View.Decorators
 {
-    class Labeled : ViewDecorator
+    class Label : ViewDecorator
     {
         public string Text { get; set; }
         public TextAlign Align { get; set; } = TextAlign.LEFT;
         public SpriteFont Font { get; set; }
         public Color FontColor { get; set; }
 
-        public Labeled(AbstractView view, string text, TextAlign textAlign) : base(view)
+        public Label(AbstractView view, string text, TextAlign textAlign) : base(view)
         {
             // Use a font as "default" label font
             Font = AssetLibrary.Instance.RetrieveAsset<SpriteFont>("Arial");

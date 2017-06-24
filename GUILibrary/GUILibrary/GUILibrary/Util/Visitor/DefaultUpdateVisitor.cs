@@ -18,7 +18,7 @@ namespace GUILibrary.Util.Visitor
             element.UpdateState(InputManager.Instance.Mouse);
         }
 
-        public void Update(Clickable element, float deltaTime)
+        public void Update(Button element, float deltaTime)
         {
             var mouseState = InputManager.Instance.Mouse;
             var mouseIsInArea = element.Bounds.Contains(new Point2D<int>(mouseState.Position.X, mouseState.Position.Y));
@@ -26,7 +26,7 @@ namespace GUILibrary.Util.Visitor
                 Mouse.SetCursor(MouseCursor.Hand); // Probably make an adapter for this
         }
 
-        public void Update(Labeled element, float deltaTime)
+        public void Update(Label element, float deltaTime)
         {
 
         }

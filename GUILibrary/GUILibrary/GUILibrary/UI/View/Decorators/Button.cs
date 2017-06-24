@@ -8,10 +8,10 @@ using GUILibrary.Util.Observable;
 
 namespace GUILibrary.UI.View.Decorators
 {
-    class Clickable : ViewDecorator
+    class Button : ViewDecorator
     {
         public Action<AbstractView> Action { get; set; }
-        public Clickable(AbstractView view, Action<AbstractView> action) : base(view)
+        public Button(AbstractView view, Action<AbstractView> action) : base(view)
         {
             Action = action;
         }

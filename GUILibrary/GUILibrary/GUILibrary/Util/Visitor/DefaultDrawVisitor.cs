@@ -18,12 +18,12 @@ namespace GUILibrary.Util.Visitor
         {
             this.drawManager = drawManager;
         }      
-        public void Draw(Clickable element)
+        public void Draw(Button element)
         {
             drawManager.Draw(element);        
         }
 
-        public void Draw(Labeled element)
+        public void Draw(Label element)
         {
             drawManager.Draw(element);
         }

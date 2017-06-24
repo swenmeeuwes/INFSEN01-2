@@ -21,7 +21,7 @@ namespace GUILibrary.Util.Visitor
             previousMouseState = InputManager.Instance.Mouse;
         }
 
-        public void HandleClick(Clickable clickable)
+        public void HandleClick(Button clickable)
         {
             var mouseState = InputManager.Instance.Mouse;
             var mouseIsInArea = clickable.Bounds.Contains(new Point2D<int>(mouseState.Position.X, mouseState.Position.Y));

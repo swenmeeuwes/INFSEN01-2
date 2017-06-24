@@ -11,7 +11,8 @@ namespace GUILibrary.Util.Visitor
     interface IUpdateVisitor
     {
         void Update(PlainView element, float deltaTime);
-        void Update(Clickable element, float deltaTime);
-        void Update(Labeled element, float deltaTime);        
+        void Update(Button element, float deltaTime);
+        void Update(Label element, float deltaTime);
+        void Update(TextInput element, float deltaTime);
     }
 }

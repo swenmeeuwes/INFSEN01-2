@@ -21,13 +21,13 @@ namespace GUILibrary.UI.Drawing
             this.drawClass = drawClass;
         }
 
-        public void Draw(Labeled element)
+        public void Draw(View.Decorators.Label element)
         {
             // Handle call the draw method from the draw class here
             throw new NotImplementedException();
         }
 
-        public void Draw(Clickable element)
+        public void Draw(Button element)
         {
             throw new NotImplementedException();
         }

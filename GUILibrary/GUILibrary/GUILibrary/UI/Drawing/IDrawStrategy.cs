@@ -9,8 +9,8 @@ namespace GUILibrary.UI.Drawing
 {
     interface IDrawStrategy
     {
-        void Draw(Clickable element);
-        void Draw(Labeled element);
+        void Draw(Button element);
+        void Draw(View.Decorators.Label element);
         void Draw(Panel element);
     }
 }

@@ -1,6 +1,4 @@
-﻿using GUILibrary.UI.Label;
-using GUILibrary.UI.View;
-using GUILibrary.UI.View.Decorators;
+﻿using GUILibrary.UI.View.Decorators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +9,7 @@ namespace GUILibrary.Util.Visitor
 {
     interface IOnClickVisitor
     {
-        void HandleClick(Clickable element);
+        void HandleClick(Button element);
+        void HandleClick(TextInput element);
     }
 }

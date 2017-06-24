@@ -71,9 +71,9 @@ namespace GUILibrary
             var printObserver = new ActionObserver(e => { Console.WriteLine(((AbstractView)e.Target).Position.X + " " + e.Type); });
             //aButton.RegisterObserver(printObserver);
 
-            var decButton = new Clickable(
+            var decButton = new Button(
                                 new Panel(
-                                    new Labeled(
+                                    new Label(
                                         new PlainView(new Point2D<int>(150, 150), new Vector2<int>(100, 48)),
                                         "Test",
                                         (TextAlign)((int)TextAlign.CENTER + (int)TextAlign.MIDDLE)

@@ -16,12 +16,12 @@ namespace GUILibrary.UI.Drawing
             this.drawStrategy = drawStrategy;
         }
 
-        public void Draw(Labeled element)
+        public void Draw(View.Decorators.Label element)
         {
             drawStrategy.Draw(element);
         }
 
-        public void Draw(Clickable element)
+        public void Draw(Button element)
         {
             drawStrategy.Draw(element);
         }
