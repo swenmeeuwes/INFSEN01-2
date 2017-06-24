@@ -36,8 +36,10 @@ namespace GUILibrary.Util.Visitor
         public void HandleClick(TextInput element)
         {
             var mouseIsInArea = element.Bounds.Contains(new Point2D<int>(mouseState.Position.X, mouseState.Position.Y));
-            if (mouseState.LeftButton == ButtonState.RELEASED && previousMouseState.LeftButton == ButtonState.PRESSED && mouseIsInArea)            
+            if (mouseState.LeftButton == ButtonState.RELEASED && previousMouseState.LeftButton == ButtonState.PRESSED && mouseIsInArea)
                 element.Selected = true;
+            else if (mouseState.LeftButton == ButtonState.RELEASED && previousMouseState.LeftButton == ButtonState.PRESSED)
+                element.Selected = false;
         }
 
         public void UpdateMouseState()

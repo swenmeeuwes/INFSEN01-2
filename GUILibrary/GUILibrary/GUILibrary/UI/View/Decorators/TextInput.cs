@@ -70,7 +70,10 @@ namespace GUILibrary.UI.View.Decorators
                 var key = validPressedKeys[0];
                 if (lastInput.AddSeconds(0.1) < now)
                 {
-                    Content += shift ? key.KeyName.ToUpper() : key.KeyName.ToLower();
+                    // Always pick the last char of the string, removes the 'd' character from the number keynames (e.g. pressing 8 will return 'd8')
+                    var keyName = key.KeyName[key.KeyName.Length - 1].ToString();                    
+
+                    Content += shift ? keyName.ToUpper() : keyName.ToLower();
                     lastInput = now;
                 }
             }

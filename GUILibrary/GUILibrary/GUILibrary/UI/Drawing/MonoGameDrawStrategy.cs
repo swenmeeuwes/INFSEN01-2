@@ -62,9 +62,9 @@ namespace GUILibrary.UI.Drawing
         public void Draw(Panel element)
         {
             // Construct a rectangle, may be moved to a factory later?
-            Texture2D rectangle = new Texture2D(graphicsDeviceManager.GraphicsDevice, element.Size.X, element.Size.Y);
+            var rectangle = new Texture2D(graphicsDeviceManager.GraphicsDevice, element.Size.X, element.Size.Y);
 
-            Color[] data = new Color[element.Size.X * element.Size.Y];
+            var data = new Color[element.Size.X * element.Size.Y];
 
             var backgroundColor = new Color(element.BackgroundColor.R, element.BackgroundColor.G, element.BackgroundColor.B, element.BackgroundColor.A);
             var borderColor = new Color(element.BorderColor.R, element.BorderColor.G, element.BorderColor.B, element.BorderColor.A);
@@ -84,6 +84,20 @@ namespace GUILibrary.UI.Drawing
         public void Draw(TextInput element)
         {
             var measuredStringSize = element.Font.MeasureString("how tall is this");
+
+            // Draw input indicator if the input field is selected
+            if (element.Selected && DateTime.Now.Millisecond % 1000 < 500)
+            {
+                var indicator = new Texture2D(graphicsDeviceManager.GraphicsDevice, 1, (int)measuredStringSize.Y);
+                var data = new Color[(int)measuredStringSize.Y];
+                for (int i = 0; i < data.Length; i++)
+                    data[i] = Color.Black;
+                indicator.SetData(data);
+
+                var measuredContentSize = element.Font.MeasureString(element.Content);
+                spriteBatch.Draw(indicator, new Vector2(element.Position.X + measuredContentSize.X + 4, element.Bounds.Y + element.Bounds.Height / 2 - measuredStringSize.Y / 2), Color.White);
+            }
+
             var calculatedPosition = new Vector2(element.Bounds.X + 4, element.Bounds.Y + element.Bounds.Height / 2 - measuredStringSize.Y / 2);
             if (element.Content.Length > 0)
                 spriteBatch.DrawString(element.Font, element.Content, calculatedPosition, new Color(element.FontColor.R, element.FontColor.G, element.FontColor.B, element.FontColor.A));
