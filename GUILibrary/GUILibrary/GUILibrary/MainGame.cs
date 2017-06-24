@@ -1,4 +1,5 @@
 ﻿using GUILibrary.AssetLoading;
+using GUILibrary.Input;
 using GUILibrary.UI.Drawing;
 using GUILibrary.UI.Label;
 using GUILibrary.UI.View;
@@ -23,6 +24,7 @@ namespace GUILibrary
         SpriteBatch spriteBatch;
 
         DrawManager drawManager;
+        IInputAdapter inputAdapter;
 
         IOnClickVisitor onClickVisitor;
         IUpdateVisitor updateVisitor;
@@ -45,8 +47,10 @@ namespace GUILibrary
         protected override void Initialize()
         {
             // Initialization logic here
-            onClickVisitor = new OnClickVisitor();
-            updateVisitor = new DefaultUpdateVisitor();
+            inputAdapter = new MonoGameInputAdapter();
+
+            onClickVisitor = new OnClickVisitor(inputAdapter);
+            updateVisitor = new DefaultUpdateVisitor(inputAdapter);
 
             // Configuration
             this.IsMouseVisible = true;
@@ -107,7 +111,7 @@ namespace GUILibrary
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == Microsoft.Xna.Framework.Input.ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             // Add your update logic here

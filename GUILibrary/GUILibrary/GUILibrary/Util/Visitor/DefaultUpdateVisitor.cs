@@ -13,14 +13,19 @@ namespace GUILibrary.Util.Visitor
 {
     class DefaultUpdateVisitor : IUpdateVisitor
     {
+        private IInputAdapter inputAdapter;
+        public DefaultUpdateVisitor(IInputAdapter inputAdapter)
+        {
+            this.inputAdapter = inputAdapter;
+        }
         public void Update(PlainView element, float deltaTime)
         {
-            element.UpdateState(InputManager.Instance.Mouse);
+            element.UpdateState(inputAdapter.GetMouseState());
         }
 
         public void Update(Button element, float deltaTime)
         {
-            var mouseState = InputManager.Instance.Mouse;
+            var mouseState = inputAdapter.GetMouseState();
             var mouseIsInArea = element.Bounds.Contains(new Point2D<int>(mouseState.Position.X, mouseState.Position.Y));
             if (mouseIsInArea)
                 Mouse.SetCursor(MouseCursor.Hand); // Probably make an adapter for this

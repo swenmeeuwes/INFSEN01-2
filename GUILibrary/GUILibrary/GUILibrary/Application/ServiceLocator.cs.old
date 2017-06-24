@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GUILibrary.Application
+{
+    class ServiceLocator
+    {
+        private static ServiceLocator _instance;
+        public static ServiceLocator Instance {
+            get {
+                if (_instance == null)
+                    _instance = new ServiceLocator();
+                return _instance;
+            }
+        }
+
+        private ServiceLocator()
+        {
+
+        }
+    }
+}

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GUILibrary.Input
 {
-    class MonoGameInputStrategy : IInputStrategy
+    class MonoGameInputAdapter : IInputAdapter
     {
         public MouseState GetMouseState()
         {

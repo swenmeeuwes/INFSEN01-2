@@ -14,16 +14,19 @@ namespace GUILibrary.Util.Visitor
 {
     class OnClickVisitor : IOnClickVisitor
     {
+        private IInputAdapter inputAdapter;
         private MouseState previousMouseState;
 
-        public OnClickVisitor()
+        public OnClickVisitor(IInputAdapter inputAdapter)
         {
-            previousMouseState = InputManager.Instance.Mouse;
+            this.inputAdapter = inputAdapter;
+
+            previousMouseState = inputAdapter.GetMouseState();
         }
 
         public void HandleClick(Button clickable)
         {
-            var mouseState = InputManager.Instance.Mouse;
+            var mouseState = inputAdapter.GetMouseState();
             var mouseIsInArea = clickable.Bounds.Contains(new Point2D<int>(mouseState.Position.X, mouseState.Position.Y));
             if (mouseState.LeftButton == ButtonState.RELEASED && previousMouseState.LeftButton == ButtonState.PRESSED && mouseIsInArea)
             {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GUILibrary.Input
 {
-    interface IInputStrategy
+    interface IInputAdapter
     {
         MouseState GetMouseState();
     }
