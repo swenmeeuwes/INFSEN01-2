@@ -19,7 +19,8 @@ namespace GUILibrary.UI.View.Decorators
         public SpriteFont Font { get; set; }
         public Color FontColor { get; set; }
 
-        private DateTime lastInput = DateTime.Now;
+        private DateTime lastInputTime = DateTime.Now;
+        private string lastInput;
         public TextInput(AbstractView view, string placeholder) : base(view)
         {
             Placeholder = placeholder;
@@ -51,10 +52,10 @@ namespace GUILibrary.UI.View.Decorators
         {
             var now = DateTime.Now;
             var backspace = pressedKeys.Count(k => k.KeyCode == 8) > 0;
-            if(backspace && Content.Length > 0 && lastInput.AddSeconds(0.05) < now)
+            if(backspace && Content.Length > 0 && lastInputTime.AddSeconds(0.05) < now)
             {
                 Content = Content.Substring(0, Content.Length - 1);
-                lastInput = now;
+                lastInputTime = now;
                 return; // Stop checking for other keys
             }
 
@@ -68,13 +69,15 @@ namespace GUILibrary.UI.View.Decorators
             if(validPressedKeys.Length > 0)
             {
                 var key = validPressedKeys[0];
-                if (lastInput.AddSeconds(0.1) < now)
-                {
-                    // Always pick the last char of the string, removes the 'd' character from the number keynames (e.g. pressing 8 will return 'd8')
-                    var keyName = key.KeyName[key.KeyName.Length - 1].ToString();                    
 
+                // Always pick the last char of the string, removes the 'd' character from the number keynames (e.g. pressing 8 will return 'd8')
+                var keyName = key.KeyName[key.KeyName.Length - 1].ToString();
+
+                if (lastInput != keyName || lastInputTime.AddSeconds(0.8) < now)
+                {
                     Content += shift ? keyName.ToUpper() : keyName.ToLower();
-                    lastInput = now;
+                    lastInputTime = now;
+                    lastInput = keyName;
                 }
             }
         }

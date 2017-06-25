@@ -76,6 +76,14 @@ namespace GUILibrary
             var printObserver = new ActionObserver(e => { Console.WriteLine(((AbstractView)e.Target).Position.X + " " + e.Type); });
             //aButton.RegisterObserver(printObserver);
 
+            var decInputInner = new TextInput(
+                                    new PlainView(new Point2D<int>(150, 250), new Vector2<int>(100, 24)),
+                                    "PLACEHOLDER"
+                                );
+            var decInput = new Panel(
+                                decInputInner
+                            );
+
             var decButton = new Button(
                                 new Panel(
                                     new Label(
@@ -83,14 +91,7 @@ namespace GUILibrary
                                         "Test",
                                         (TextAlign)((int)TextAlign.CENTER + (int)TextAlign.MIDDLE)
                                     )
-                                ), (v => v.Position += new Point2D<int>(5, 0))
-                            );
-
-            var decInput = new Panel(
-                                new TextInput(                                                                   
-                                    new PlainView(new Point2D<int>(150, 250), new Vector2<int>(100, 24)),
-                                    "PLACEHOLDER"
-                                )
+                                ), (v => Console.WriteLine(decInputInner.Content))
                             );
 
             // Todo: Implement mediators ... 
