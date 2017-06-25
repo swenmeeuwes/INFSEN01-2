@@ -25,7 +25,7 @@ namespace GUILibrary.UI.View.Decorators
 
         public override Rectangle<int> Bounds => view.Bounds;
 
-        public override ViewState State { get => view.State; set => view.State = value; }
+        //public override ViewState State { get => view.State; set => view.State = value; }
         public override GUIWindow Parent { get => view.Parent; set => view.Parent = value; }
 
         public override void Draw(IDrawVisitor visitor)

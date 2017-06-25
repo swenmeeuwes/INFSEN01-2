@@ -20,7 +20,7 @@ namespace GUILibrary.Util.Visitor
         }
         public void Update(PlainView element, float deltaTime)
         {
-            element.UpdateState(inputAdapter.GetMouseState());
+            
         }
 
         public void Update(Button element, float deltaTime)
@@ -28,7 +28,7 @@ namespace GUILibrary.Util.Visitor
             var mouseState = inputAdapter.GetMouseState();
             var mouseIsInArea = element.Bounds.Contains(new Point2D<int>(mouseState.Position.X, mouseState.Position.Y));
             if (mouseIsInArea)
-                Mouse.SetCursor(MouseCursor.Hand); // Probably make an adapter for this
+                Mouse.SetCursor(MouseCursor.Hand); // Probably make an adapter for this            
         }
 
         public void Update(Label element, float deltaTime)

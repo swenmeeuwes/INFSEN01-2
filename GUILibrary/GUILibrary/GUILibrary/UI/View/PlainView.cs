@@ -26,12 +26,12 @@ namespace GUILibrary.UI.View
                 return new Rectangle<int>(Position.X, Position.Y, Size.X, Size.Y);
             }
         }
-        public override ViewState State { get; set; }
+        //public override ViewState State { get; set; }
         public override GUIWindow Parent { get; set; }
 
         public PlainView(Point2D<int> position, Vector2<int> size)
         {
-            State = ViewState.IDLE;
+            //State = ViewState.IDLE;
 
             Position = position;
             Size = size;
@@ -44,7 +44,7 @@ namespace GUILibrary.UI.View
 
         public override void Update(IUpdateVisitor updateVisitor, float deltaTime)
         {
-            
+            // As fast as the speed of light
         }
 
         public override void HandleClick(IOnClickVisitor onClickVisitor)
@@ -52,118 +52,119 @@ namespace GUILibrary.UI.View
             // And because ninja's arent visible, you cannot click them!
         }
 
-        public void UpdateState(MouseState mouseState)
-        {
-            var mouseIsInArea = Bounds.Contains(new Point2D<int>(mouseState.Position.X, mouseState.Position.Y));
-            var mouseIsPressed = mouseState.LeftButton == ButtonState.PRESSED || mouseState.MiddleButton == ButtonState.PRESSED || mouseState.RightButton == ButtonState.PRESSED;
+        // Before decorator patterns were cool ;'c
+        //public void UpdateState(MouseState mouseState)
+        //{
+        //    var mouseIsInArea = Bounds.Contains(new Point2D<int>(mouseState.Position.X, mouseState.Position.Y));
+        //    var mouseIsPressed = mouseState.LeftButton == ButtonState.PRESSED || mouseState.MiddleButton == ButtonState.PRESSED || mouseState.RightButton == ButtonState.PRESSED;
 
-            switch (State)
-            {
-                case ViewState.IDLE:
-                    // Transitions
-                    if (mouseIsInArea && mouseIsPressed)
-                        State = ViewState.PRESSED;
-                    else if (mouseIsInArea && !mouseIsPressed)
-                        State = ViewState.ENTER;
+        //    switch (State)
+        //    {
+        //        case ViewState.IDLE:
+        //            // Transitions
+        //            if (mouseIsInArea && mouseIsPressed)
+        //                State = ViewState.PRESSED;
+        //            else if (mouseIsInArea && !mouseIsPressed)
+        //                State = ViewState.ENTER;
 
-                    break;
-                case ViewState.ENTER:
-                    // Trigger lifecycle method
-                    OnMouseEnter(mouseState);
+        //            break;
+        //        case ViewState.ENTER:
+        //            // Trigger lifecycle method
+        //            OnMouseEnter(mouseState);
 
-                    // Transitions
-                    if (mouseIsInArea && mouseIsPressed)
-                        State = ViewState.PRESSED;
-                    else if (mouseIsInArea && !mouseIsPressed)
-                        State = ViewState.OVER;
-                    else if (!mouseIsInArea && !mouseIsPressed)
-                        State = ViewState.EXIT;
+        //            // Transitions
+        //            if (mouseIsInArea && mouseIsPressed)
+        //                State = ViewState.PRESSED;
+        //            else if (mouseIsInArea && !mouseIsPressed)
+        //                State = ViewState.OVER;
+        //            else if (!mouseIsInArea && !mouseIsPressed)
+        //                State = ViewState.EXIT;
 
-                    break;
-                case ViewState.OVER:
-                    // Trigger lifecycle method
-                    OnMouseOver(mouseState);
+        //            break;
+        //        case ViewState.OVER:
+        //            // Trigger lifecycle method
+        //            OnMouseOver(mouseState);
 
-                    // Transitions
-                    if (mouseIsInArea && mouseIsPressed)
-                        State = ViewState.PRESSED;
-                    else if (mouseIsInArea && !mouseIsPressed)
-                        State = ViewState.OVER;
-                    else if (!mouseIsInArea)
-                        State = ViewState.EXIT;
-                    break;
-                case ViewState.EXIT:
-                    // Trigger lifecycle method
-                    OnMouseExit(mouseState);
+        //            // Transitions
+        //            if (mouseIsInArea && mouseIsPressed)
+        //                State = ViewState.PRESSED;
+        //            else if (mouseIsInArea && !mouseIsPressed)
+        //                State = ViewState.OVER;
+        //            else if (!mouseIsInArea)
+        //                State = ViewState.EXIT;
+        //            break;
+        //        case ViewState.EXIT:
+        //            // Trigger lifecycle method
+        //            OnMouseExit(mouseState);
 
-                    // Transitions
-                    State = ViewState.IDLE;
+        //            // Transitions
+        //            State = ViewState.IDLE;
 
-                    break;
-                case ViewState.PRESSED:
-                    // Trigger lifecycle method
-                    OnMousePress(mouseState);
+        //            break;
+        //        case ViewState.PRESSED:
+        //            // Trigger lifecycle method
+        //            OnMousePress(mouseState);
 
-                    // Transitions
-                    if (mouseIsPressed)
-                        State = ViewState.DOWN;
-                    else
-                        State = ViewState.EXIT;
+        //            // Transitions
+        //            if (mouseIsPressed)
+        //                State = ViewState.DOWN;
+        //            else
+        //                State = ViewState.EXIT;
 
-                    break;
-                case ViewState.DOWN:
-                    // Trigger lifecycle method
-                    OnMouseDown(mouseState);
+        //            break;
+        //        case ViewState.DOWN:
+        //            // Trigger lifecycle method
+        //            OnMouseDown(mouseState);
 
-                    // Transitions
-                    if (mouseIsPressed)
-                        State = ViewState.DOWN;
-                    else
-                        State = ViewState.RELEASED;
+        //            // Transitions
+        //            if (mouseIsPressed)
+        //                State = ViewState.DOWN;
+        //            else
+        //                State = ViewState.RELEASED;
 
-                    break;
-                case ViewState.RELEASED:
-                    // Trigger lifecycle method
-                    OnMouseRelease(mouseState);
+        //            break;
+        //        case ViewState.RELEASED:
+        //            // Trigger lifecycle method
+        //            OnMouseRelease(mouseState);
 
-                    // Transitions
-                    if (mouseIsInArea)
-                        State = ViewState.OVER;
-                    else
-                        State = ViewState.EXIT;
+        //            // Transitions
+        //            if (mouseIsInArea)
+        //                State = ViewState.OVER;
+        //            else
+        //                State = ViewState.EXIT;
 
-                    break;
-            }
-        }
+        //            break;
+        //    }
+        //}
 
-        protected virtual void OnMousePress(MouseState mouseState)
-        {
+        //protected virtual void OnMousePress(MouseState mouseState)
+        //{
 
-        }
+        //}
 
-        protected virtual void OnMouseDown(MouseState mouseState)
-        {
+        //protected virtual void OnMouseDown(MouseState mouseState)
+        //{
 
-        }
+        //}
 
-        protected virtual void OnMouseRelease(MouseState mouseState)
-        {
+        //protected virtual void OnMouseRelease(MouseState mouseState)
+        //{
 
-        }
+        //}
 
-        protected virtual void OnMouseEnter(MouseState mouseState)
-        {
+        //protected virtual void OnMouseEnter(MouseState mouseState)
+        //{
 
-        }
+        //}
 
-        protected virtual void OnMouseOver(MouseState mouseState)
-        {
+        //protected virtual void OnMouseOver(MouseState mouseState)
+        //{
 
-        }
+        //}
 
-        protected virtual void OnMouseExit(MouseState mouseState)
-        {
+        //protected virtual void OnMouseExit(MouseState mouseState)
+        //{
 
-        }
+        //}
     }
 }

@@ -21,7 +21,7 @@ namespace GUILibrary.UI.View
         public abstract Vector2<int> Size { get; set; }
         //public abstract Vector2 Origin { get; set; }
         public abstract Rectangle<int> Bounds { get; }
-        public abstract ViewState State { get; set; }
+        //public abstract ViewState State { get; set; }
         public abstract GUIWindow Parent { get; set; }
 
         public abstract void Draw(IDrawVisitor drawVisitor);
