@@ -9,6 +9,7 @@ using GUILibrary.UI.Label;
 using GUILibrary.UI.View.Decorators;
 using Microsoft.Xna.Framework.Content;
 using GUILibrary.UI.View.State;
+using GUILibrary.Input;
 
 namespace GUILibrary.UI.Drawing
 {
@@ -17,11 +18,13 @@ namespace GUILibrary.UI.Drawing
         private SpriteBatch spriteBatch;
         private GraphicsDeviceManager graphicsDeviceManager;
         private ContentManager contentManager;
-        public MonoGameDrawStrategy(SpriteBatch spriteBatch, GraphicsDeviceManager graphicsDeviceManager, ContentManager contentManager)
+        private IInputAdapter inputAdapter;
+        public MonoGameDrawStrategy(SpriteBatch spriteBatch, GraphicsDeviceManager graphicsDeviceManager, ContentManager contentManager, IInputAdapter inputAdapter)
         {
             this.spriteBatch = spriteBatch;
             this.graphicsDeviceManager = graphicsDeviceManager;
             this.contentManager = contentManager;
+            this.inputAdapter = inputAdapter;
         }
         public void Draw(Button element)
         {
@@ -61,6 +64,9 @@ namespace GUILibrary.UI.Drawing
 
         public void Draw(Panel element)
         {
+            var mouseIsInArea = element.Bounds.Contains(inputAdapter.GetMouseState().Position);
+
+
             // Construct a rectangle, may be moved to a factory later?
             var rectangle = new Texture2D(graphicsDeviceManager.GraphicsDevice, element.Size.X, element.Size.Y);
 
@@ -73,7 +79,7 @@ namespace GUILibrary.UI.Drawing
                 if(i % element.Size.X == 0 || i % element.Size.X == element.Size.X - 1 || i < element.Size.X || i > element.Size.X * (element.Size.Y - 1))
                     data[i] = borderColor;
                 else
-                    data[i] = backgroundColor;
+                    data[i] = mouseIsInArea ? Color.LightGray : backgroundColor;
             }
 
             rectangle.SetData(data);
@@ -84,7 +90,7 @@ namespace GUILibrary.UI.Drawing
         public void Draw(TextInput element)
         {
             var measuredStringSize = element.Font.MeasureString("how tall is this");
-
+            
             // Draw input indicator if the input field is selected
             if (element.Selected && DateTime.Now.Millisecond % 1000 < 500)
             {

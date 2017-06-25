@@ -79,7 +79,7 @@ namespace GUILibrary
             // Load your game content here  
             AssetLoadService.Instance.LoadAssets(Content);
 
-            drawManager = new DrawManager(new MonoGameDrawStrategy(spriteBatch, graphics, Content));
+            drawManager = new DrawManager(new MonoGameDrawStrategy(spriteBatch, graphics, Content, inputAdapter));
             drawVisitor = new DefaultDrawVisitor(drawManager);
 
             // Goto main screen
