@@ -18,12 +18,14 @@ namespace GUILibrary.UI.View.Decorators
         public string Placeholder { get; set; }
         public SpriteFont Font { get; set; }
         public Color FontColor { get; set; }
+        public int Width { get; set; }
 
         private DateTime lastInputTime = DateTime.Now;
         private string lastInput;
-        public TextInput(AbstractView view, string placeholder) : base(view)
+        public TextInput(AbstractView view, string placeholder, int width) : base(view)
         {
             Placeholder = placeholder;
+            Width = width;
 
             // Use a font as "default" label font
             Font = AssetLibrary.Instance.RetrieveAsset<SpriteFont>("Arial");
@@ -58,6 +60,9 @@ namespace GUILibrary.UI.View.Decorators
                 lastInputTime = now;
                 return; // Stop checking for other keys
             }
+
+            if (Content.Length + 1 > Width)
+                return;
 
             // Modifier key checks
             var shift = pressedKeys.Count(k => k.KeyCode == 160 || k.KeyCode == 161) > 0;

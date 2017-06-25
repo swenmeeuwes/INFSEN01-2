@@ -63,7 +63,8 @@ namespace GUILibrary.Application.Controller
                                 );
             var textInputInner = new TextInput(
                                     new PlainView(new Point2D<int>(32, (32 + 4) * 2), new Vector2<int>(128, 32)),
-                                    "Placeholder"
+                                    "Placeholder",
+                                    15
                                 );
             var textInput = new Panel(
                                 textInputInner
