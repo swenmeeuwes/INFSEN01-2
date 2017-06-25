@@ -1,6 +1,7 @@
 ﻿using GUILibrary.Input;
 using GUILibrary.UI.Drawing;
 using GUILibrary.UI.View.State;
+using GUILibrary.UI.Window;
 using GUILibrary.Util.Observable;
 using GUILibrary.Util.Structures;
 using GUILibrary.Util.Visitor;
@@ -21,6 +22,7 @@ namespace GUILibrary.UI.View
         //public abstract Vector2 Origin { get; set; }
         public abstract Rectangle<int> Bounds { get; }
         public abstract ViewState State { get; set; }
+        public abstract GUIWindow Parent { get; set; }
 
         public abstract void Draw(IDrawVisitor drawVisitor);
 

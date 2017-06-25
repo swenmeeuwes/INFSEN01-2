@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GUILibrary.UI.View.State;
 using GUILibrary.Util.Structures;
 using GUILibrary.Util.Visitor;
+using GUILibrary.UI.Window;
 
 namespace GUILibrary.UI.View.Decorators
 {
@@ -25,6 +26,7 @@ namespace GUILibrary.UI.View.Decorators
         public override Rectangle<int> Bounds => view.Bounds;
 
         public override ViewState State { get => view.State; set => view.State = value; }
+        public override GUIWindow Parent { get => view.Parent; set => view.Parent = value; }
 
         public override void Draw(IDrawVisitor visitor)
         {

@@ -8,6 +8,7 @@ using GUILibrary.UI.View.State;
 using GUILibrary.Util.Observable;
 using GUILibrary.Util.Structures;
 using GUILibrary.Input;
+using GUILibrary.UI.Window;
 
 namespace GUILibrary.UI.View
 {
@@ -26,6 +27,7 @@ namespace GUILibrary.UI.View
             }
         }
         public override ViewState State { get; set; }
+        public override GUIWindow Parent { get; set; }
 
         public PlainView(Point2D<int> position, Vector2<int> size)
         {

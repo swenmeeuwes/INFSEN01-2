@@ -42,6 +42,11 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="Application\ServiceLocator.cs.old" />
+    <Compile Include="Application\Controller\AbstractScreenFactory.cs" />
+    <Compile Include="Application\Controller\MonoGameApplicationAdapter.cs" />
+    <Compile Include="Application\Controller\IApplicationAdapter.cs" />
+    <Compile Include="Application\Controller\ScreenFactory.cs" />
+    <Compile Include="Application\Controller\ScreenNavigator.cs" />
     <Compile Include="AssetLoading\AssetLibrary.cs" />
     <Compile Include="AssetLoading\AssetLoadService.cs" />
     <Compile Include="AssetLoading\Model\AssetModel.cs" />
@@ -119,6 +124,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Application\View\" />
     <Folder Include="Content\Assets\Fonts\" />
     <Folder Include="Content\Assets\Images\" />
   </ItemGroup>

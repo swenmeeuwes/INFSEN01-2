@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GUILibrary.Util.Collection.List
 {
-    class CustomListIterator<T> : IIterator<T>
+    class CustomListIterator<T> : Collection.IIterator<T>
     {
         public List<T> Content { get; private set; }
         private int indexCounter;

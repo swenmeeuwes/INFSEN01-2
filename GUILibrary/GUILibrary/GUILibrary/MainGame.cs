@@ -1,4 +1,5 @@
-﻿using GUILibrary.AssetLoading;
+﻿using GUILibrary.Application.Controller;
+using GUILibrary.AssetLoading;
 using GUILibrary.Input;
 using GUILibrary.UI.Drawing;
 using GUILibrary.UI.Label;
@@ -24,14 +25,16 @@ namespace GUILibrary
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        DrawManager drawManager;
+        AbstractScreenFactory screenFactory;
+        ScreenNavigator screenNavigator;
+
+        IDrawManager drawManager;
         IInputAdapter inputAdapter;
+        IApplicationAdapter applicationAdapter;
 
         IOnClickVisitor onClickVisitor;
         IUpdateVisitor updateVisitor;
         IDrawVisitor drawVisitor;
-
-        GUIWindow mainWindow;
 
         public MainGame()
         {
@@ -48,6 +51,10 @@ namespace GUILibrary
         protected override void Initialize()
         {
             // Initialization logic here
+            screenFactory = new ScreenFactory();
+            applicationAdapter = new MonoGameApplicationAdapter(this);
+            screenNavigator = new ScreenNavigator(screenFactory, applicationAdapter);
+
             inputAdapter = new MonoGameInputAdapter();
 
             onClickVisitor = new OnClickVisitor(inputAdapter);
@@ -72,36 +79,11 @@ namespace GUILibrary
             // Load your game content here  
             AssetLoadService.Instance.LoadAssets(Content);
 
-            //var aButton = new Button("This be a button", new Point2D<int>(100, 100));
-            var printObserver = new ActionObserver(e => { Console.WriteLine(((AbstractView)e.Target).Position.X + " " + e.Type); });
-            //aButton.RegisterObserver(printObserver);
-
-            var decInputInner = new TextInput(
-                                    new PlainView(new Point2D<int>(150, 250), new Vector2<int>(100, 24)),
-                                    "PLACEHOLDER"
-                                );
-            var decInput = new Panel(
-                                decInputInner
-                            );
-
-            var decButton = new Button(
-                                new Panel(
-                                    new Label(
-                                        new PlainView(new Point2D<int>(150, 150), new Vector2<int>(100, 48)),
-                                        "Test",
-                                        (TextAlign)((int)TextAlign.CENTER + (int)TextAlign.MIDDLE)
-                                    )
-                                ), (v => Console.WriteLine(decInputInner.Content))
-                            );
-
-            // Todo: Implement mediators ... 
-            mainWindow = new GUIWindow("main",
-                decButton,
-                decInput
-            );
-
             drawManager = new DrawManager(new MonoGameDrawStrategy(spriteBatch, graphics, Content));
             drawVisitor = new DefaultDrawVisitor(drawManager);
+
+            // Goto main screen
+            screenNavigator.OpenScreen(ScreenFactory.MAIN_SCREEN);
         }
 
         /// <summary>
@@ -129,8 +111,13 @@ namespace GUILibrary
 
             onClickVisitor.UpdateMouseState();
 
-            mainWindow.HandleClick(onClickVisitor);
-            mainWindow.Update(updateVisitor, deltaTime);
+            var screenIterator = screenNavigator.GetScreenIterator();
+            while(screenIterator.HasNext())
+            {
+                var screen = screenIterator.Next();
+                screen.HandleClick(onClickVisitor);
+                screen.Update(updateVisitor, deltaTime);
+            }
 
             base.Update(gameTime);
         }
@@ -143,9 +130,14 @@ namespace GUILibrary
         {
             GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.CornflowerBlue);
 
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp); // SamplerState.PointClamp disables smooth/ blurry stretching of textures
+            spriteBatch.Begin();
 
-            mainWindow.Draw(drawVisitor);
+            var screenIterator = screenNavigator.GetScreenIterator();
+            while (screenIterator.HasNext())
+            {
+                var screen = screenIterator.Next();
+                screen.Draw(drawVisitor);
+            }
 
             spriteBatch.End();
 
