@@ -48,7 +48,7 @@
     <Compile Include="Application\Controller\ScreenFactory.cs" />
     <Compile Include="Application\Controller\ScreenNavigator.cs" />
     <Compile Include="AssetLoading\AssetLibrary.cs" />
-    <Compile Include="AssetLoading\AssetLoadService.cs" />
+    <Compile Include="AssetLoading\MonoGameAssetLoadService.cs" />
     <Compile Include="AssetLoading\Model\AssetModel.cs" />
     <Compile Include="AssetLoading\Model\ManifestModel.cs" />
     <Compile Include="Input\IInputAdapter.cs" />

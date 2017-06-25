@@ -10,6 +10,7 @@ using GUILibrary.UI.View.Decorators;
 using Microsoft.Xna.Framework.Content;
 using GUILibrary.UI.View.State;
 using GUILibrary.Input;
+using GUILibrary.AssetLoading;
 
 namespace GUILibrary.UI.Drawing
 {
@@ -37,7 +38,8 @@ namespace GUILibrary.UI.Drawing
 
         public void Draw(View.Decorators.Label element)
         {
-            var measuredStringSize = element.Font.MeasureString(element.Text);
+            var font = AssetLibrary.Instance.RetrieveAsset<SpriteFont>(element.Font);
+            var measuredStringSize = font.MeasureString(element.Text);
 
             Vector2 calculatedPosition = new Vector2(element.Bounds.X, element.Bounds.Y);
             switch ((int)element.Align)
@@ -59,7 +61,7 @@ namespace GUILibrary.UI.Drawing
                     break;
             }
 
-            spriteBatch.DrawString(element.Font, element.Text, calculatedPosition, new Color(element.FontColor.R, element.FontColor.G, element.FontColor.B, element.FontColor.A));
+            spriteBatch.DrawString(font, element.Text, calculatedPosition, new Color(element.FontColor.R, element.FontColor.G, element.FontColor.B, element.FontColor.A));
         }
 
         public void Draw(Panel element)
@@ -107,7 +109,8 @@ namespace GUILibrary.UI.Drawing
 
         public void Draw(TextInput element)
         {
-            var measuredStringSize = element.Font.MeasureString("how tall is this");
+            var font = AssetLibrary.Instance.RetrieveAsset<SpriteFont>(element.Font);
+            var measuredStringSize = font.MeasureString("how tall is this");
             
             // Draw input indicator if the input field is selected
             if (element.Selected && DateTime.Now.Millisecond % 1000 < 500)
@@ -118,15 +121,15 @@ namespace GUILibrary.UI.Drawing
                     data[i] = Color.Black;
                 indicator.SetData(data);
 
-                var measuredContentSize = element.Font.MeasureString(element.Content);
+                var measuredContentSize = font.MeasureString(element.Content);
                 spriteBatch.Draw(indicator, new Vector2(element.Position.X + measuredContentSize.X + 4, element.Bounds.Y + element.Bounds.Height / 2 - measuredStringSize.Y / 2), Color.White);
             }
 
             var calculatedPosition = new Vector2(element.Bounds.X + 4, element.Bounds.Y + element.Bounds.Height / 2 - measuredStringSize.Y / 2);
             if (element.Content.Length > 0)
-                spriteBatch.DrawString(element.Font, element.Content, calculatedPosition, new Color(element.FontColor.R, element.FontColor.G, element.FontColor.B, element.FontColor.A));
+                spriteBatch.DrawString(font, element.Content, calculatedPosition, new Color(element.FontColor.R, element.FontColor.G, element.FontColor.B, element.FontColor.A));
             else
-                spriteBatch.DrawString(element.Font, element.Placeholder, calculatedPosition, Color.Gray);
+                spriteBatch.DrawString(font, element.Placeholder, calculatedPosition, Color.Gray);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace GUILibrary.UI.View.Decorators
         public bool Selected { get; set; }
         public string Content { get; set; }
         public string Placeholder { get; set; }
-        public SpriteFont Font { get; set; }
+        public string Font { get; set; }
         public Color FontColor { get; set; }
         public int Width { get; set; }
 
@@ -28,7 +28,7 @@ namespace GUILibrary.UI.View.Decorators
             Width = width;
 
             // Use a font as "default" label font
-            Font = AssetLibrary.Instance.RetrieveAsset<SpriteFont>("Arial");
+            Font = "Arial";
             FontColor = Color.Black;
 
             Selected = false;

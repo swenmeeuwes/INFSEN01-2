@@ -11,21 +11,21 @@ using System.Threading.Tasks;
 
 namespace GUILibrary.AssetLoading
 {
-    class AssetLoadService
+    class MonoGameAssetLoadService
     {
-        private static AssetLoadService instance = null;
-        public static AssetLoadService Instance
+        private static MonoGameAssetLoadService instance = null;
+        public static MonoGameAssetLoadService Instance
         {
             get
             {
                 if (instance == null)
-                    instance = new AssetLoadService();
+                    instance = new MonoGameAssetLoadService();
                 return instance;
             }
         }
 
         // Make the constructor private and thus uninstantiateable
-        private AssetLoadService() { }
+        private MonoGameAssetLoadService() { }
 
         public void LoadAssets(ContentManager contentManager)
         {

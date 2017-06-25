@@ -16,13 +16,13 @@ namespace GUILibrary.UI.View.Decorators
     {
         public string Text { get; set; }
         public TextAlign Align { get; set; } = TextAlign.LEFT;
-        public SpriteFont Font { get; set; }
+        public string Font { get; set; }
         public Color FontColor { get; set; }
 
         public Label(AbstractView view, string text, TextAlign textAlign) : base(view)
         {
             // Use a font as "default" label font
-            Font = AssetLibrary.Instance.RetrieveAsset<SpriteFont>("Arial");
+            Font = "Arial";
             FontColor = Color.Black;
             
             Text = text;
