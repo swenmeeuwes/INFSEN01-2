@@ -64,7 +64,9 @@ namespace GUILibrary.UI.Drawing
 
         public void Draw(Panel element)
         {
-            var mouseIsInArea = element.Bounds.Contains(inputAdapter.GetMouseState().Position);
+            var mouseState = inputAdapter.GetMouseState();
+            var mouseIsInArea = element.Bounds.Contains(mouseState.Position);
+            var leftMouseIsDown = mouseState.LeftButton == ButtonState.PRESSED;
 
 
             // Construct a rectangle, may be moved to a factory later?
@@ -72,14 +74,30 @@ namespace GUILibrary.UI.Drawing
 
             var data = new Color[element.Size.X * element.Size.Y];
 
-            var backgroundColor = new Color(element.BackgroundColor.R, element.BackgroundColor.G, element.BackgroundColor.B, element.BackgroundColor.A);
+
+            var workingBackgroundColor = element.BackgroundColor.Clone();
+            // Color modifiers
+            if (mouseIsInArea) {
+                workingBackgroundColor.R -= 30;
+                workingBackgroundColor.G -= 30;
+                workingBackgroundColor.B -= 30;
+            }
+            if (leftMouseIsDown && mouseIsInArea)
+            {
+                workingBackgroundColor.R -= 20;
+                workingBackgroundColor.G -= 20;
+                workingBackgroundColor.B -= 20;
+            }
+
+            var backgroundColor = new Color(workingBackgroundColor.R, workingBackgroundColor.G, workingBackgroundColor.B, workingBackgroundColor.A);
             var borderColor = new Color(element.BorderColor.R, element.BorderColor.G, element.BorderColor.B, element.BorderColor.A);
+
             for (int i = 0; i < data.Length; i++)
             {
                 if(i % element.Size.X == 0 || i % element.Size.X == element.Size.X - 1 || i < element.Size.X || i > element.Size.X * (element.Size.Y - 1))
                     data[i] = borderColor;
                 else
-                    data[i] = mouseIsInArea ? Color.LightGray : backgroundColor;
+                    data[i] = backgroundColor;
             }
 
             rectangle.SetData(data);

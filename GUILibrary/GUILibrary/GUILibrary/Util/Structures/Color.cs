@@ -34,5 +34,10 @@ namespace GUILibrary.Util.Structures
             B = b;
             A = 255;
         }
+
+        public Color Clone()
+        {
+            return new Color(R, G, B);
+        }
     }
 }
